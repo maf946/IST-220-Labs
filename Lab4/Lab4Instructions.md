@@ -72,7 +72,7 @@ For this lab, you’ll be creating **four** PyCharm projects. Each project will 
  
 
 
-## **Section **2:** ** Inspecting** UDP Traffic Through Wireshark**
+## Section 2: Inspecting UDP Traffic Through Wireshark
 
 ** **
 
@@ -101,7 +101,7 @@ In this section, you’ll be launching Wireshark, then running UDPClient.py and 
 <p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image1.png "image_tooltip")
+![alt_text](images/ServerIPandPortOutput.png)
 
 
 **Step 4**: While the UDPServer is still running, switch over to the UDPClient project in PyCharm. Replace the values for serverIP and serverPort in the source code with the values from the UDPServer. Make sure to keep the serverIP value in double quotes. Run the UDPClient, and send a message from the client to the server. You should receive a response in upper-case, as in the screenshot below:
@@ -111,7 +111,7 @@ In this section, you’ll be launching Wireshark, then running UDPClient.py and 
 <p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image2.png "image_tooltip")
+![alt_text](images/UDPServerResponse.png)
 
 
 **Question 1**: Post a screenshot of the “Run” area in PyCharm for both UDPServer and UDPClient, after you have successfully sent a message between the two.
@@ -179,11 +179,12 @@ Let’s start up the TCPServer. The server will accept requests on port 12000. W
 <p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image3.png "image_tooltip")
+![alt_text](images/Pktriot.png)
 
 
 Provide your friend with the IPv4 address, but not the port number. Instead, make your friend earn it by giving them a range of 100 port numbers around the port number.[^1] For example:
 
+TODO: convert the below to markdown
 
 <table>
   <tr>
@@ -238,7 +239,7 @@ It may take a few seconds, but before long you should see output which will tell
 <p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image4.png "image_tooltip")
+![alt_text](images/nmap.png)
 
 
 **Question 3**: Post a screenshot of the nmap command and output. Also include the full name and Penn State email address of the friend who was acting as the server.
@@ -247,11 +248,11 @@ It may take a few seconds, but before long you should see output which will tell
 
 **Phase 2**: Now that you’ve found out how to sneak in to your very rude friend’s server, it’s time to go ahead and do that
 
-**Step 1: **In Wireshark, start a capture on the ‘_any_’ interface
+**Step 1:** In Wireshark, start a capture on the ‘_any_’ interface
 
  
 
-**Step 2: **Use the TCP client to connect to the TCP server on the appropriate port. You’ll need to modify the serverIP and serverPort values appropriately. 
+**Step 2:** Use the TCP client to connect to the TCP server on the appropriate port. You’ll need to modify the serverIP and serverPort values appropriately. 
 
 **Step 3**: Send a message to the server, and observe the result coming back. You should see a result like the below:
 
@@ -263,7 +264,7 @@ It may take a few seconds, but before long you should see output which will tell
 ![alt_text](images/image5.png "image_tooltip")
 
 
-**Step 4: **Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
+**Step 4:** Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
 
 **Step 5: **Close the new window, and observe that the Wireshark filter is set to a particular TCP stream (ex: “tcp.stream eq 0”). Based on what you now know about the TCP segment structure, explore this list of 10 or so packets.
 
