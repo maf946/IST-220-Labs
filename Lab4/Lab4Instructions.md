@@ -53,11 +53,11 @@ In this section, you’ll be launching Wireshark, then running UDPClient.py and 
 
 **Step 3**: Run the UDPServer project in PyCharm. Keep it running. Make a note of the serverIP and serverPort values visible in the “Run” portion of the PyCharm window, as in the screenshot below:
 
-![alt_text](images/ServerIPandPortOutput.png)
+![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/ServerIPandPortOutput.png?raw=true)
 
 **Step 4**: While the UDPServer is still running, switch over to the UDPClient project in PyCharm. Replace the values for serverIP and serverPort in the source code with the values from the UDPServer. Make sure to keep the serverIP value in double quotes. Run the UDPClient, and send a message from the client to the server. You should receive a response in upper-case, as in the screenshot below:
 
-![alt_text](images/UDPServerResponse.png)
+![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/UDPServerResponse.png?raw=true)
 
 
 **Question 1**: Post a screenshot of the “Run” area in PyCharm for both UDPServer and UDPClient, after you have successfully sent a message between the two.
@@ -105,7 +105,7 @@ Next, we’ll configure the pktriot client. Run `pktriot configure`. Enter “3�
 
 Let’s start up the TCPServer. The server will accept requests on port 12000. We need to expose that port to the rest of the world (including your IST 220 friend) by creating an endpoint using Packetriot. Run the command `pktriot tcp 12000`. You will see a result like the screenshot below. Make note of the IPv4 and port values, highlighted by example in the screenshot.
 
-![alt_text](images/Pktriot.png)
+![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/pktriot.png?raw=true)
 
 Provide your friend with the IPv4 address, but not the port number. Instead, make your friend earn it by giving them a range of 100 port numbers around the port number.[^1] For example:
 
@@ -153,7 +153,7 @@ In a terminal window, run that command, replacing the IP address and port range 
 
 It may take a few seconds, but before long you should see output which will tell you the open port, and you should see a result like the below. You want to find ports where the STATE is “open.” There may be several in the range (as in the screenshot), but one of them will be your friend’s. You may have to try each of them until you succeed.
 
-![alt_text](images/nmap.png)
+![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/nmap.png?raw=true)
 
 **Question 3**: Post a screenshot of the nmap command and output. Also include the full name and Penn State email address of the friend who was acting as the server.
 
