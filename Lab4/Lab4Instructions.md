@@ -32,12 +32,7 @@ For this lab, you’ll be creating **four** PyCharm projects. Each project will 
 3. A project called TCPServer. Replace the contents of main.py with the contents of TCPServer.py. When prompted, I suggest opening the project in a New Window.
 4. A project called TCPClient. Replace the contents of main.py with the contents of TCPClient.py. When prompted, I suggest opening the project in a New Window.
 
- 
-
-
 ## Section 2: Inspecting UDP Traffic Through Wireshark
-
-** **
 
 As seen in the last few labs, Wireshark will listen and document hundreds of different networking protocols. So far, we’ve seen HTTP and DNS, but in this lab, we will be focusing on the TCP and UDP packets that are being exchanged between the client and the server. 
 
@@ -75,7 +70,7 @@ First, some table stakes:
 * We’ll be using the **nmap** port scanner. Make sure to read the following sections of the textbook, which describe nmap:
     * In chapter 3.2, in a “Focus On Security: Port Scanning” section
     * The end of chapter 3.5.6
-* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run `sudo apt install nmap`.** **
+* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run `sudo apt install nmap`.
 
 
 ### When you’re acting as the server…
