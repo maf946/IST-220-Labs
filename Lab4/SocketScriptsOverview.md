@@ -33,7 +33,7 @@ We’ll use the following simple client-server application to demonstrate socket
 
 **Figure 1** highlights the main socket-related activity of the client and server that communicate over the UDP transport service.
 
-![Figure 1: The client-server application using UDP](https://github.com/maf946/SocketScripts/blob/master/Figure1.png)
+![Figure 1: The client-server application using UDP](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/UDPDiagram.png?raw=true)
 
 Now let’s get our hands dirty and take a look at the client-server program pair for a UDP implementation of this simple application. We also provide a detailed, line-by-line analysis after each program. We’ll begin with the UDP client, which will send a simple application-level message to the server. In order for the server to be able to receive and reply to the client’s message, it must be ready and running—that is, it must be running as a process before the client sends its message.
 
@@ -189,11 +189,11 @@ During the three-way handshake, the client process knocks on the welcoming door 
 
 From the application’s perspective, the client’s socket and the server’s connection socket are directly connected by a pipe. As shown in Figure 2, the client process can send arbitrary bytes into its socket, and TCP guarantees that the server process will receive (through the connection socket) each byte in the order sent. TCP thus provides a reliable service between the client and server processes. Furthermore, just as people can go in and out the same door, the client process not only sends bytes into but also receives bytes from its socket; similarly, the server process not only receives bytes from but also sends bytes into its connection socket.
 
-![Figure 2: The TCPServer process has two sockets](https://github.com/maf946/SocketScripts/blob/master/Figure2.png)
+![Figure 2: The TCPServer process has two sockets](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/WelcomeSocketDiagram.png?raw=true)
 
 We use the same simple client-server application to demonstrate socket programming with TCP: The client sends one line of data to the server, the server capitalizes the line and sends it back to the client. Figure 3 highlights the main socket-related activity of the client and server that communicate over the TCP transport service.
 
-![Figure 3: The client-server application using TCP](https://github.com/maf946/SocketScripts/blob/master/Figure3.png)
+![Figure 3: The client-server application using TCP](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/TCPDiagram.png?raw=true)
 
 #### TCPClient.py
 
