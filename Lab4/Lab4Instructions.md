@@ -104,33 +104,12 @@ Let’s start up the TCPServer. The server will accept requests on port 12000. W
 
 Provide your friend with the IPv4 address, but not the port number. Instead, make your friend earn it by giving them a range of 100 port numbers around the port number.[^1] For example:
 
-**TODO: convert the below to Markdown**
-<table>
-  <tr>
-   <td><strong>TCPServer.py port</strong>
-   </td>
-   <td><strong>Range to tell your friend</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>22434
-   </td>
-   <td>22400-22499
-   </td>
-  </tr>
-  <tr>
-   <td>23569
-   </td>
-   <td>23500-23599
-   </td>
-  </tr>
-  <tr>
-   <td>25121
-   </td>
-   <td>25100-25199
-   </td>
-  </tr>
-</table>
+
+TCPServer.py port | Range to tell your friend 
+------ | ------
+22434  | 22400-22499    
+23569  | 23500-23599   
+25121  | 25100-25199      
 
 Keep your TCP server running for the remainder of the exercise. 
 
@@ -160,7 +139,7 @@ It may take a few seconds, but before long you should see output which will tell
 
 **Step 3**: Send a message to the server, and observe the result coming back. You should see a result like the below:
 
-![alt_text](images/TCPRemoteClient.png)
+![alt_text](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/UDPServerResponse.png)
 
 **Step 4:** Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
 
