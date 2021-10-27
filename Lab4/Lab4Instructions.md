@@ -152,8 +152,6 @@ For up to 5 points of extra credit, make a copy of UDPServer.py and call it UDPS
 
 Since this is extra credit, we leave the research on how to accomplish this to you. 
 
-## Notes
-
 [^1]:
      Perhaps this is why I do not have more friends.
 
