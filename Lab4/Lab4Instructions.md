@@ -36,15 +36,13 @@ For this lab, you’ll be creating **four** PyCharm projects. Each project will 
 
 As seen in the last few labs, Wireshark will listen and document hundreds of different networking protocols. So far, we’ve seen HTTP and DNS, but in this lab, we will be focusing on the TCP and UDP packets that are being exchanged between the client and the server. 
 
- 
-
 In this section, you’ll be launching Wireshark, then running UDPClient.py and UDPServer.py. 
 
 **Step 0**: As a precaution to make sure you don’t have network adapter issues, reboot your virtual machine.
 
-**Step 1:** Launch Wireshark with _sudo wireshark_
+**Step 1:** Launch Wireshark with `sudo wireshark`
 
-**Step 2**: Start sniffing the ‘_any_’ interface. This will intercept all packet traffic (regardless of network interface) on your machine.
+**Step 2**: Start sniffing the "**any**" interface (it is literally called "any", and is most likely the third entry in the interface list). This will intercept all packet traffic (regardless of network interface) on your machine.
 
 **Step 3**: Run the UDPServer project in PyCharm. Keep it running. Make a note of the serverIP and serverPort values visible in the “Run” portion of the PyCharm window, as in the screenshot below:
 
@@ -81,20 +79,13 @@ Please sign up for an account at [https://packetriot.com/signup](https://packetr
 
 After you click the verification link, click the “Free” plan, and “Skip” entering a credit card.
 
-Next, we’ll set up the pktriot application on your virtual machine. Enter the following commands, as described in the [Packetriot Download page](https://packetriot.com/downloads). I strongly recommend copying and pasting these, rather than retyping. Note that command 3 below is in fact one command, though it’s quite lengthy.
+Next, we’ll set up the pktriot application on your virtual machine. Enter the **five** commands under the "apt" section at the top of the [Packetriot Download page](https://packetriot.com/downloads). I recommend loading the Download page in Firefox in your virtual machine, and then copying each of the commands and pasting them into the terminal, in order. For your reference, the five commands start as follows (but these are **not** the complete commands; please copy and paste them from the Download page):
 
-
-1. `sudo apt-get install apt-transport-https gnupg -y`
-2. `wget -qO - https://download.packetriot.com/linux/debian/pubkey.gpg | sudo apt-key add - `
-3. `echo "deb [arch=amd64] https://download.packetriot.com/linux/debian/buster/stable/non-free/binary-amd64 / 
-deb [arch=i386]  https://download.packetriot.com/linux/debian/buster/stable/non-free/binary-i386  / 
-deb [arch=armhf] https://download.packetriot.com/linux/debian/buster/stable/non-free/binary-armhf / 
-deb [arch=arm64] https://download.packetriot.com/linux/debian/buster/stable/non-free/binary-arm64 / 
-" | sudo tee /etc/apt/sources.list.d/packetriot.list`
+1. `sudo apt-get install…`
+2. `wget -q0…`
+3. `echo "…`
 4. `sudo apt-get update`
-5. `sudo apt-get install pktriot`
-
- 
+5. `sudo apt-get install…`
 
 Next, we’ll configure the pktriot client. Run `pktriot configure`. Enter “3” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works).
 
