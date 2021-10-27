@@ -87,9 +87,14 @@ Next, we’ll set up the pktriot application on your virtual machine. Enter the 
 4. `sudo apt-get update`
 5. `sudo apt-get install…`
 
-**NOTE:** If you get an error message at step 4 that begins "E: Malformed entry 1 in list file…", run the command below, and then repeat the five commands described above:
+<div style="background: #f6f6f6;
+        color: black;
+        border: 1px solid black;
+        margin: 0px auto;
+        width: 456px;
+        padding: 10px;
+        border-radius: 10px;">If you get an error message at step 4 that begins "E: Malformed entry 1 in list file…", run the command below, and then repeat the five commands described above: <div style="font-family: monospace">sudo rm /etc/apt/sources.list.d/packetriot.list</div></div>
 
-`sudo rm /etc/apt/sources.list.d/packetriot.list`
 
 Next, we’ll configure the pktriot client. Run `pktriot configure`. Enter “3” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works).
 
