@@ -87,6 +87,10 @@ Next, we’ll set up the pktriot application on your virtual machine. Enter the 
 4. `sudo apt-get update`
 5. `sudo apt-get install…`
 
+**NOTE:** If you get an error message at step 4 that begins "E: Malformed entry 1 in list file…", run the command below, and then repeat the five commands described above:
+
+`sudo rm /etc/apt/sources.list.d/packetriot.list`
+
 Next, we’ll configure the pktriot client. Run `pktriot configure`. Enter “3” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works).
 
 Let’s start up the TCPServer. The server will accept requests on port 12000. We need to expose that port to the rest of the world (including your IST 220 friend) by creating an endpoint using Packetriot. Run the command `pktriot tcp 12000`. You will see a result like the screenshot below. Make note of the IPv4 and port values, highlighted by example in the screenshot.
