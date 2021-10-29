@@ -6,7 +6,7 @@ def get_ip_address():
 	return s.getsockname()[0]
 	
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-serverSocket.bind(('', 0))
+serverSocket.bind(('', 12000))
 
 serverIP = get_ip_address()
 serverPort = serverSocket.getsockname()[1]
