@@ -24,7 +24,7 @@ When you run the Wireshark program, you’ll get a startup screen that looks som
 
 ![Initial Wireshark screen](InitialWiresharkScreen.png)
 
-On your virtual machine, double-click the appropriate interface to start capturing (it will likely be labeled "Wi-Fi: " at the beginning). A screen like the one below will be displayed, showing information about the packets being captured. Once you start packet capture, you can stop it by using the Capture pull-down menu and selecting Stop, or by clicking the red fin icon.
+On your machine, double-click the appropriate interface to start capturing (it will likely be labeled "Wi-Fi: " at the beginning). A screen like the one below will be displayed, showing information about the packets being captured. Once you start packet capture, you can stop it by using the Capture pull-down menu and selecting Stop, or by clicking the red fin icon.
 
 ![Wireshark Graphical User Interface](WiresharkGUI.png)
 
