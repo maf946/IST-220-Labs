@@ -16,13 +16,7 @@ We will be using the [Wireshark packet sniffer](http://www.wireshark.org/) for t
 
 ## Getting Wireshark
 
-Install Wireshark by running `sudo apt install wireshark`, and when prompted on the screen titled "Configuring wireshark-common" (see the image below), selecting "Yes" with your keyboard:
-
-![Configuring wireshark-common](ConfiguringWiresharkCommon.png)
-
-Next, run `sudo usermod -a -G wireshark $USER` and `newgrp wireshark`.
-
-Finally, launch Wireshark by running `wireshark`
+Download and install Wireshark by accessing the [Download Wireshark](https://www.wireshark.org/download.html) page.
 
 ## Running Wireshark
 
@@ -30,9 +24,7 @@ When you run the Wireshark program, you’ll get a startup screen that looks som
 
 ![Initial Wireshark screen](InitialWiresharkScreen.png)
 
-In the Capture section, there is a list of interfaces, starting with **ens33**. All packets to/from this virtual machine across the network will pass through this interface, so this is the interface to use; always select **ens33**, unless lab instructions tell you otherwise. 
-
-On your virtual machine, double-click the ens33 interface to start capturing. A screen like the one below will be displayed, showing information about the packets being captured. Once you start packet capture, you can stop it by using the Capture pull-down menu and selecting Stop, or by clicking the red fin icon.
+On your virtual machine, double-click the appropriate interface to start capturing (it will likely be labeled "Wi-Fi: " at the beginning). A screen like the one below will be displayed, showing information about the packets being captured. Once you start packet capture, you can stop it by using the Capture pull-down menu and selecting Stop, or by clicking the red fin icon.
 
 ![Wireshark Graphical User Interface](WiresharkGUI.png)
 
