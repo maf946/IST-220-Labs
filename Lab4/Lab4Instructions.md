@@ -38,9 +38,7 @@ As seen in the last few labs, Wireshark will listen and document hundreds of dif
 
 In this section, you’ll be launching Wireshark, then running UDPClient.py and UDPServer.py. 
 
-**Step 0**: As a precaution to make sure you don’t have network adapter issues, reboot your virtual machine.
-
-**Step 1:** Launch Wireshark with `sudo wireshark`
+**Step 1:** Launch Wireshark.
 
 **Step 2**: Start sniffing the "**any**" interface (it is literally called "any", and is most likely the third entry in the interface list). This will intercept all packet traffic (regardless of network interface) on your machine.
 
@@ -61,7 +59,7 @@ In this section, you’ll be launching Wireshark, then running UDPClient.py and 
 
 ## Section 3: TCP Port Scanning with a Friend
 
-In this section, you’ll be working with a friend (or at least a classmate… somebody other than yourself). You’ll use a port scan to find the TCP server on your friend’s virtual machine, then connect to it. (And the friend will do the same, vice-versa; this lab is still an individual assignment).
+In this section, you’ll be working with a friend (or at least a classmate… somebody other than yourself). You’ll use a port scan to find the TCP server on your friend’s machine, then connect to it. (And the friend will do the same, vice-versa; this lab is still an individual assignment).
 
 First, some table stakes:
 
@@ -79,20 +77,9 @@ Please sign up for an account at [https://packetriot.com/signup](https://packetr
 
 After you click the verification link, click the “Free” plan, and “Skip” entering a credit card.
 
-Next, we’ll set up the pktriot application on your virtual machine. Enter the **five** commands under the "apt" section at the top of the [Packetriot Download page](https://packetriot.com/downloads). I recommend loading the Download page in Firefox in your virtual machine, and then copying each of the commands and pasting them into the terminal, in order. For your reference, the five commands start as follows (but these are **not** the complete commands; please copy and paste them from the Download page):
+Next, we’ll set up the pktriot application on your  machine. Grab the correct version for your machine from the [Packetriot Download page](https://packetriot.com/downloads). 
 
-1. `sudo apt-get install…`
-2. `wget -q0…`
-3. `echo "…`
-4. `sudo apt-get update`
-5. `sudo apt-get install…`
-
-> **Note:** If you get an error message at step 4 that begins "E: Malformed entry 1 in list file…", run the command below, and then repeat the five commands described above:
-
-> `sudo rm /etc/apt/sources.list.d/packetriot.list`
-
-
-Next, we’ll configure the pktriot client. Run `pktriot configure`. Enter “3” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works).
+Next, we’ll configure the pktriot client. Run `pktriot configure`. Enter “3” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works). For more information about the Packetiot client, see the [Packetriot Quickstart guide](https://docs.packetriot.com/packetriot/).
 
 Let’s start up the TCPServer. The server will accept requests on port 12000. We need to expose that port to the rest of the world (including your IST 220 friend) by creating an endpoint using Packetriot. Run the command `pktriot tcp 12000`. You will see a result like the screenshot below. Make note of the IPv4 and port values, highlighted by example in the screenshot.
 
