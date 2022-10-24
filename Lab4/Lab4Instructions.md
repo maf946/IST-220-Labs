@@ -69,7 +69,7 @@ First, some table stakes:
 * Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run the following commands if you're using Ubuntu on Windows:
    * `sudo apt install update` 
    * `sudo apt install nmap`
-* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer, and then use nmap from the terminal.
+* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer by right-clicking it and selecting "Open", and then use nmap from the terminal.
 
 
 ### When you’re acting as the server…
