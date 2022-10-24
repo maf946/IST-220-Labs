@@ -82,7 +82,7 @@ After you click the verification link, click the “Free” plan, and “Skip”
 
 Next, we’ll set up the pktriot application on your  machine. Grab the correct version for your machine from the [Packetriot Download page](https://packetriot.com/downloads). 
 
-Next, we’ll configure the pktriot client. Run `pktriot configure`. Enter “3” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works). For more information about the Packetiot client, see the [Packetriot Quickstart guide](https://docs.packetriot.com/packetriot/).
+Next, we’ll configure the pktriot client. Run `pktriot configure`. Select “us-east” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works). For more information about the Packetiot client, see the [Packetriot Quickstart guide](https://docs.packetriot.com/packetriot/).
 
 Let’s start up the TCPServer. The server will accept requests on port 12000. We need to expose that port to the rest of the world (including your IST 220 friend) by creating an endpoint using Packetriot. Run the command `pktriot tcp 12000`. You will see a result like the screenshot below. Make note of the IPv4 and port values, highlighted by example in the screenshot.
 
