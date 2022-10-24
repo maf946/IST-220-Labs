@@ -66,7 +66,10 @@ First, some table stakes:
 * We’ll be using the **nmap** port scanner. Make sure to read the following sections of the textbook, which describe nmap:
     * In chapter 3.2, in a “Focus On Security: Port Scanning” section
     * The end of chapter 3.5.6
-* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run `sudo apt install nmap` if you're using Ubuntu on Windows; if you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer, and then use nmap from the terminal.
+* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run the following commands if you're using Ubuntu on Windows:
+   * `sudo apt install update` 
+   * `sudo apt install nmap`
+* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer, and then use nmap from the terminal.
 
 
 ### When you’re acting as the server…
