@@ -53,7 +53,7 @@ In this section, you’ll be launching Wireshark, then running UDPClient.py and 
 
 **Question 1**: Post a screenshot of the “Run” area in PyCharm for both UDPServer and UDPClient, after you have successfully sent a message between the two.
 
-**Step 5**: Stop your Wireshark capture. Next, in Wireshark, identify the UDP packet(s) containing the message you sent in the prior step (i.e., the lowercase text). Explore the packet details area until you find the “data” corresponding to the message you sent. Using Wireshark, highlight the text corresponding to the message you sent, then take a screenshot of the entire Wireshark window.
+**Step 5**: Stop your Wireshark capture. Next, in Wireshark, identify the UDP packet(s) containing the message you sent in the prior step (i.e., the lowercase text). Right-click one of the two packets, and select Follow, then UDP Stream. Take a screenshot of the resulting Wireshark window.
 
 **Question 2**: Post the screenshot described above.
 
