@@ -40,7 +40,7 @@ In this section, you’ll be launching Wireshark, then running UDPClient.py and 
 
 **Step 1:** Launch Wireshark.
 
-**Step 2**: Start sniffing the "**any**" interface (it is literally called "any", and is most likely the third entry in the interface list). This will intercept all packet traffic (regardless of network interface) on your machine.
+**Step 2**: Start sniffing the **loopback/lo0** interface.
 
 **Step 3**: Run the UDPServer project in PyCharm. Keep it running. Make a note of the serverIP and serverPort values visible in the “Run” portion of the PyCharm window, as in the screenshot below:
 
@@ -66,7 +66,7 @@ First, some table stakes:
 * We’ll be using the **nmap** port scanner. Make sure to read the following sections of the textbook, which describe nmap:
     * In chapter 3.2, in a “Focus On Security: Port Scanning” section
     * The end of chapter 3.5.6
-* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run `sudo apt install nmap`.
+* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run `sudo apt install nmap` if you're using Ubuntu on Windows; if you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer, and then use nmap from the terminal.
 
 
 ### When you’re acting as the server…
