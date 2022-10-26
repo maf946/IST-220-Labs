@@ -88,6 +88,8 @@ Let’s start up the TCPServer. The server will accept requests on port 12000. W
 
 ![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/pktriot.png?raw=true)
 
+_If you get an error message saying that you've hit the maximum number of tunnels, log in to [packetriot.com/tunnels](https://packetriot.com/tunnels), click on the name of one or more tunnels, and click "Delete."_
+
 Provide your friend with the IPv4 address, but not the port number. Instead, make your friend earn it by giving them a range of 100 port numbers around the port number.[^1] For example:
 
 
