@@ -85,6 +85,7 @@ Next, we’ll set up the pktriot application on your machine. Grab the correct v
 Here are quick screencasts illustrating the next few steps, which are described further below the videos:
 
 * [Running pktriot on Windows](https://psu.mediaspace.kaltura.com/media/pktriot+Windows/1_8wgyp04m)
+   * Note that **you must run "Extract All…"**__ on the contents of the .zip file, and then drag the extracted file onto the command prompt  
 * [Running pktriot on macOS](https://psu.mediaspace.kaltura.com/media/pktriot+Mac/1_d9zaj2dv)
    * Note that you will need to right-click on the pktriot file and select "Open" before you can run the application for the first time. 
 
