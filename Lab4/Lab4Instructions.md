@@ -127,7 +127,7 @@ It may take a few seconds, but before long you should see output which will tell
 
 **Phase 2**: Now that you’ve found out how to sneak in to your very rude friend’s server, it’s time to go ahead and do that
 
-**Step 1:** In Wireshark, start a capture on the ‘_any_’ interface
+**Step 1:** In Wireshark, start a capture on your primary interface (not the loopback interface).
 
 **Step 2:** Use the TCP client to connect to the TCP server on the appropriate port. You’ll need to modify the serverIP and serverPort values appropriately. 
 
