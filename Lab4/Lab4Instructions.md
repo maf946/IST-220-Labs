@@ -133,7 +133,7 @@ It may take a few seconds, but before long you should see output which will tell
 
 **Step 3**: Send a message to the server, and observe the result coming back. You should see a result like the below:
 
-![alt_text](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/UDPServerResponse.png)
+![alt_text](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/TCPRemoteClient.png)
 
 **Step 4:** Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
 
