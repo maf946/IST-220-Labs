@@ -86,6 +86,7 @@ Here are quick screencasts illustrating the next few steps, which are described 
 
 * [Running pktriot on Windows](https://psu.mediaspace.kaltura.com/media/pktriot+Windows/1_8wgyp04m)
 * [Running pktriot on macOS](https://psu.mediaspace.kaltura.com/media/pktriot+Mac/1_d9zaj2dv)
+   * Note that you will need to right-click on the pktriot file and select "Open" before you can run the application for the first time. 
 
 Next, we’ll configure the pktriot client. Run `pktriot configure`. Select “us-east” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works). For more information about the Packetiot client, see the [Packetriot Quickstart guide](https://docs.packetriot.com/packetriot/).
 
