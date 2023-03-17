@@ -4,8 +4,6 @@ Create your own Lab 4 Report document in Microsoft Word, and clearly label your 
 
 By the end of this lab, you’ll be able to:
 
-
-
 * Develop a greater understanding for how packets use sockets and ports to communicate with arbitrary devices
 * Learn how to use Nmap for port scanning
 
@@ -74,7 +72,15 @@ First, some table stakes:
 
 ### When you’re acting as the server…
 
-Depending on how your Internet connection is configured, it may be difficult for people to connect to your server because of NAT or firewall issues. To fix this, we’ll be using the (free) service, Packetriot, when running the server. I encourage you to review the official “[Getting Started with Packetriot](https://docs.packetriot.com)” documentation, which includes a video. However, what follows is a distillation of the key steps you must follow.
+Follow one of the two subsections below.
+
+#### If you and your partner are both connected to the PSU Wi-Fi network
+
+Randomly select a port other than 12000 and replace 12000 in the TCPServer.py code.
+
+#### If you and your partner are not both connected to the PSU Wi-Fi network
+
+Depending on how your Internet connection is configured, it may be difficult for people to connect to your server because of NAT or firewall issues. To fix this, we’ll be using the (free) service, Packetriot, when running the server. I encourage you to review the official “Getting Started with Packetriot” documentation, which includes a video. However, what follows is a distillation of the key steps you must follow.
 
 Please sign up for an account at [https://packetriot.com/signup](https://packetriot.com/signup). Use whatever email account you’d like; you’ll need to click a verification link sent to that account. Obviously, don’t forget the password you use to create the account.
 
@@ -93,7 +99,7 @@ Next, we’ll configure the pktriot client. Run `pktriot configure`. Select “u
 
 Let’s start up the TCPServer. The server will accept requests on port 12000. We need to expose that port to the rest of the world (including your IST 220 friend) by creating an endpoint using Packetriot. Run the command `pktriot tcp 12000`. You will see a result like the screenshot below. Make note of the IPv4 and port values, highlighted by example in the screenshot.
 
-![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/pktriot.png?raw=true)
+![pktriot output](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/pktriot.png)
 
 _If you get an error message saying that you've hit the maximum number of tunnels, log in to [packetriot.com/tunnels](https://packetriot.com/tunnels), click on the name of one or more tunnels, and click "Delete."_
 
