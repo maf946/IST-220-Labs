@@ -121,7 +121,7 @@ Keep your TCP server running for the remainder of the exercise.
 Observe the following example usage:
 
 ```
-sudo nmap 159.203.126.35 -sS -p 22400-22499.
+sudo nmap 159.203.126.35 -sS -p 22400-22499
 ```
 
 In a terminal window, run that command, replacing the IP address and port range as appropriate. The -sS option means you would like to run a stealth scan; a more detailed explanation of what this means is [available from the official nmap site](https://nmap.org/book/synscan.html).
