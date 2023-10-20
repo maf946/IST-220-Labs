@@ -64,10 +64,9 @@ First, some table stakes:
 * We’ll be using the **nmap** port scanner. Make sure to read the following sections of the textbook, which describe nmap:
     * In chapter 3.2, in a “Focus On Security: Port Scanning” section
     * The end of chapter 3.5.6
-* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and run the following commands if you're using Ubuntu on Windows:
-   * `sudo apt update` 
-   * `sudo apt install nmap`
-* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer by right-clicking it and selecting "Open", and then use nmap from the terminal.
+* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and install it:
+	* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer by right-clicking it and selecting "Open", and then use nmap from the terminal.
+	* If you're on Windows, [download nmap](https://nmap.org/download.html#windows), run the installer, and install both nmap and Npcap. You can uncheck the box asking if you want to create a shortcut on your desktop.
 
 
 ### When you’re acting as the server…
@@ -118,13 +117,14 @@ Keep your TCP server running for the remainder of the exercise.
 
 **Phase 1**: Your friend is being a real pain and is not giving you a specific port number[^2], so you’ll need to snoop/scan around and find the open port in the range provided. nmap seems like it would be handy here, so let’s use that.
 
-Observe the following example usage:
+Observe the following example usages:
 
-```
-sudo nmap 159.203.126.35 -sS -p 22400-22499
-```
+OS | Command
+-----|-----
+macOS (run in Terminal) | `sudo nmap 159.203.126.35 -sS -p 22400-22499`
+Windows (run in Command Prompt as administrator; see more instructions below) | `sudo nmap 159.203.126.35 -sS -p 22400-22499`
 
-In a terminal window, run that command, replacing the IP address and port range as appropriate. The -sS option means you would like to run a stealth scan; a more detailed explanation of what this means is [available from the official nmap site](https://nmap.org/book/synscan.html).
+Run that command, replacing the IP address and port range as appropriate. The -sS option means you would like to run a stealth scan; a more detailed explanation of what this means is [available from the official nmap site](https://nmap.org/book/synscan.html).
 
 It may take a few seconds, but before long you should see output which will tell you the open port, and you should see a result like the below. You want to find ports where the STATE is “open.” There may be several in the range (as in the screenshot), but one of them will be your friend’s. You may have to try each of them until you succeed.
 
