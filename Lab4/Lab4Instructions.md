@@ -135,7 +135,7 @@ Run that command, replacing the IP address and port range as appropriate. The -s
 
 It may take a few seconds, but before long you should see output which will tell you the open port, and you should see a result like the below. You want to find ports where the STATE is “open.” There may be several in the range (as in the screenshot), but one of them will be your friend’s. You may have to try each of them until you succeed.
 
-![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/nmap.png?raw=true)
+![nmap output](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/nmap.png?raw=true)
 
 **Question 3**: Post a screenshot of the nmap command and output. Also include the full name and Penn State email address of the friend who was acting as the server.
 
@@ -147,9 +147,13 @@ It may take a few seconds, but before long you should see output which will tell
 
 **Step 3**: Send a message to the server, and observe the result coming back. You should see a result like the below:
 
-![alt_text](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/TCPRemoteClient.png)
+![TCP Remote Client](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/TCPRemoteClient.png)
 
 **Step 4:** Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
+
+A tip for finding one of the TCP packets: In Wireshark, select "Edit" at the top of the screen, then "Find Packet…". Change the first pulldown to "Packet bytes" and the third to "String," as shown in the image below. Enter a search term that you know will be found, i.e., one of the words from the message that you sent in lower/upper case, and then hit "Find."
+
+![Using Find Packet…](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/findPacket.png)
 
 **Step 5:** Close the new window, and observe that the Wireshark filter is set to a particular TCP stream (ex: “tcp.stream eq 0”). Based on what you now know about the TCP segment structure, explore this list of 10 or so packets.
 
