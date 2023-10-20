@@ -122,7 +122,7 @@ Observe the following example usages:
 OS | Command
 -----|-----
 macOS (run in Terminal) | `sudo nmap 159.203.126.35 -sS -p 22400-22499`
-Windows (run in Command Prompt as administrator; see more instructions below) | `sudo nmap 159.203.126.35 -sS -p 22400-22499`
+Windows (run in Command Prompt as administrator; see more instructions below) | `nmap 159.203.126.35 -sS -p 22400-22499`
 
 	Windows Users: Opening the Command Prompt as Administrator
 	
