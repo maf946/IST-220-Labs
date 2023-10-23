@@ -73,37 +73,17 @@ First, some table stakes:
 
 Follow one of the two subsections below.
 
-#### If you and your partner are both connected to the PSU Wi-Fi network
+##### If you and your partner are both connected to the PSU Wi-Fi network
 
 Randomly select a port other than 12000 and replace 12000 in the TCPServer.py code.
 
-#### If you and your partner are not both connected to the PSU Wi-Fi network
+##### If you and your partner are not both connected to the PSU Wi-Fi network
 
-Depending on how your Internet connection is configured, it may be difficult for people to connect to your server because of NAT or firewall issues. To fix this, we’ll be using the (free) service, Packetriot, when running the server. I encourage you to review the official “Getting Started with Packetriot” documentation, which includes a video. However, what follows is a distillation of the key steps you must follow.
+**Note as of Fall 2023**: In the past, I've recommended Packetriot as a tool to tunnel through any firewall or NAT issues that might be in place when not using Penn State Wi-Fi. This solution is no longer working. I have an alternative (ngrok), but my experience is that it's just easier for everybody if we all connect to PSU Wi-Fi, so please do that. 
 
-Please sign up for an account at [https://packetriot.com/signup](https://packetriot.com/signup). Use whatever email account you’d like; you’ll need to click a verification link sent to that account. Obviously, don’t forget the password you use to create the account.
-
-After you click the verification link, click the “Free” plan, and “Skip” entering a credit card.
-
-Next, we’ll set up the pktriot application on your machine. Grab the correct version for your machine from the [Packetriot Download page](https://packetriot.com/downloads). 
-
-Here are quick screencasts illustrating the next few steps, which are described further below the videos:
-
-* [Running pktriot on Windows](https://psu.mediaspace.kaltura.com/media/pktriot+Windows/1_8wgyp04m)
-   * Note that **you must run "Extract All…"**__ on the contents of the .zip file, and then drag the extracted file onto the command prompt  
-* [Running pktriot on macOS](https://psu.mediaspace.kaltura.com/media/pktriot+Mac/1_d9zaj2dv)
-   * Note that you will need to right-click on the pktriot file and select "Open" before you can run the application for the first time. 
-
-Next, we’ll configure the pktriot client. Run `pktriot configure`. Select “us-east” when prompted for a selection. Next, enter the email and password you used when creating your Packetriot account. Then, select whichever region you’d like (us-east certainly works). For more information about the Packetiot client, see the [Packetriot Quickstart guide](https://docs.packetriot.com/packetriot/).
-
-Let’s start up the TCPServer. The server will accept requests on port 12000. We need to expose that port to the rest of the world (including your IST 220 friend) by creating an endpoint using Packetriot. Run the command `pktriot tcp 12000`. You will see a result like the screenshot below. Make note of the IPv4 and port values, highlighted by example in the screenshot.
-
-![pktriot output](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/pktriot.png)
-
-_If you get an error message saying that you've hit the maximum number of tunnels, log in to [packetriot.com/tunnels](https://packetriot.com/tunnels), click on the name of one or more tunnels, and click "Delete."_
+<hr />
 
 Provide your friend with the IPv4 address, but not the port number. Instead, make your friend earn it by giving them a range of 100 port numbers around the port number.[^1] For example:
-
 
 TCPServer.py port | Range to tell your friend 
 ------ | ------
