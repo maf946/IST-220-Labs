@@ -75,11 +75,11 @@ Follow one of the two subsections below.
 
 ##### If you and your partner are both connected to the PSU Wi-Fi network
 
-Randomly select a port other than 12000 and replace 12000 in the TCPServer.py code.
+Great, everything should work fine.
 
 ##### If you and your partner are not both connected to the PSU Wi-Fi network
 
-**Note as of Fall 2023**: In the past, I've recommended Packetriot as a tool to tunnel through any firewall or NAT issues that might be in place when not using Penn State Wi-Fi. This solution is no longer working. I have an alternative (ngrok), but my experience is that it's just easier for everybody if we all connect to PSU Wi-Fi, so please do that. 
+In this situation, things are a bit more complicated. Please let me know if this applies to you, and I'll walk you through a few different approaches to dealing with the problem.
 
 <hr />
 
