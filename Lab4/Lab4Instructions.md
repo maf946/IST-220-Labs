@@ -66,7 +66,9 @@ First, some table stakes:
     * The end of chapter 3.5.6
 * Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and install it:
 	* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer by right-clicking it and selecting "Open", and then use nmap from the terminal.
-	* If you're on Windows, [download nmap](https://nmap.org/download.html#windows), run the installer, and install both nmap and Npcap. You can uncheck the box asking if you want to create a shortcut on your desktop.
+	* If you're on Windows, either:
+		* (easier) run `choco install nmap` in a Command Prompt or PowerShell window with administrator privileges
+   		* [download nmap](https://nmap.org/download.html#windows), run the installer, and install both nmap and Npcap. You can uncheck the box asking if you want to create a shortcut on your desktop.
 
 
 ### When you’re acting as the server…
