@@ -14,16 +14,14 @@ For this lab, you’ll be using four primary Python scripts:
 
 
 
-1. UDPServer.py ([click to view](https://raw.githubusercontent.com/maf946/SocketScripts/master/UDPServer.py))
-2. UDPClient.py ([click to view](https://raw.githubusercontent.com/maf946/SocketScripts/master/UDPClient.py))
-3. TCPServer.py ([click to view](https://raw.githubusercontent.com/maf946/SocketScripts/master/TCPServer.py))
-4. TCPClient.py ([click to view](https://raw.githubusercontent.com/maf946/SocketScripts/master/TCPClient.py))
+1. [UDPServer.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/UDPServer.py)
+2. [UDPClient.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/UDPClient.py)
+3. [TCPServer.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/TCPServer.py) 
+4. [TCPClient.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/TCPClient.py) 
 
 I’ve provided those four source files, as well as extensive documentation, in a GitHub repository. [Click this link](https://github.com/maf946/SocketScripts), and start reading the documentation, which begins with the heading “Socket Programming: Creating Network Applications.” **If you do not carefully read the documentation linked above, you will not understand the rest of the lab**. Carefully reading the documentation will require your full attention, and may take quite some time. Get started now.
 
 For this lab, you’ll be creating **four** PyCharm projects. Each project will have a main.py file. My suggestion is that you create the projects as follows:
-
-
 
 1. A project called UDPServer. Replace the contents of main.py with the contents of UDPServer.py.
 2. A project called UDPClient. Replace the contents of main.py with the contents of UDPClient.py. When prompted, I suggest opening the project in a New Window.
