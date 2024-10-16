@@ -1,2 +1,9 @@
 
 .DS_Store
+.idea/aws.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/IST-220-Labs.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
