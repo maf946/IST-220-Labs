@@ -123,7 +123,7 @@ It may take a few seconds, but before long you should see output which will tell
 
 **Step 3**: Send a message to the server, and observe the result coming back. You should see a result like the below:
 
-![TCP Remote Client](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/TCPRemoteClient.png)
+![TCP Remote Client](https://raw.githubusercontent.com/maf946/IST-220-Labs/refs/heads/main/Lab4/Images/TCPRemoteClient.png)
 
 **Step 4:** Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
 
@@ -134,16 +134,6 @@ A tip for finding one of the TCP packets: In Wireshark, select "Edit" at the top
 **Step 5:** Close the new window, and observe that the Wireshark filter is set to a particular TCP stream (ex: “tcp.stream eq 0”). Based on what you now know about the TCP segment structure, explore this list of 10 or so packets.
 
 **Question 4**: Post a screenshot of the Wireshark window with the appropriate filter set. In a well-written paragraph, explain what is happening across the course of the TCP stream. Hint: not all of the packets are for transporting the message you typed into the terminal. There is a lot of other plumbing that is happening behind the scenes, and which is now exposed to you in Wireshark.
-
-## Section 4: Extra Credit Opportunity
-
-This lab has given you an inside look as to how TCP and UDP operate. You observed that the messages you were sending were transmitted in plain text, where they could be easily captured and interpreted.
-
-As an **_optional_** extra credit problem, you add the barest modicum of cryptographic protection to your message by using the ROT13 substitution cipher. Essentially, we can replace each letter with the 13th letter after it in the alphabet, with “a” becoming “n,” “b” becoming “o”, and so on. For example, the ROT13 encrypted version of the plaintext message “tcp” would be “gpc.” To explore more, use the simple demo tool available at [https://rot13.com](https://rot13.com).
-
-For up to 5 points of extra credit, make a copy of UDPServer.py and call it UDPServerROT13.py. Modify the source so that, rather than returning the uppercase version of the message sent by the client, it returns the ROT13 encrypted version. Provide the complete source code of UDPServerROT13.py, and a screenshot of your code in operation (from the client side).
-
-Since this is extra credit, we leave the research on how to accomplish this to you. 
 
 [^1]:
      Perhaps this is why I do not have more friends.
