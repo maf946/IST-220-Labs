@@ -19,8 +19,6 @@ For this lab, you’ll be using four primary Python scripts:
 3. [TCPServer.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/TCPServer.py) 
 4. [TCPClient.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/TCPClient.py) 
 
-I’ve provided those four source files, as well as extensive documentation, in a GitHub repository. [Click this link](https://github.com/maf946/SocketScripts), and start reading the documentation, which begins with the heading “Socket Programming: Creating Network Applications.” **If you do not carefully read the documentation linked above, you will not understand the rest of the lab**. Carefully reading the documentation will require your full attention, and may take quite some time. Get started now.
-
 For this lab, you’ll be creating **four** PyCharm projects. Each project will have a main.py file. My suggestion is that you create the projects as follows:
 
 1. A project called UDPServer. Replace the contents of main.py with the contents of UDPServer.py.
@@ -59,9 +57,7 @@ In this section, you’ll be working with a friend (or at least a classmate… s
 
 First, some table stakes:
 
-* We’ll be using the **nmap** port scanner. Make sure to read the following sections of the textbook, which describe nmap:
-    * In chapter 3.2, in a “Focus On Security: Port Scanning” section
-    * The end of chapter 3.5.6
+* We’ll be using the **nmap** port scanner. Make sure to read the following overview: [What is Nmap and How to Use It](https://www.freecodecamp.org/news/what-is-nmap-and-how-to-use-it-a-tutorial-for-the-greatest-scanning-tool-of-all-time/).
 * Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and install it:
 	* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer by right-clicking it and selecting "Open", and then use nmap from the terminal.
 	* If you're on Windows, either:
