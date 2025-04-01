@@ -47,7 +47,7 @@ In this section, you’ll be launching Wireshark, then running UDPClient.py and 
 
 **Question 1**: Post a screenshot of the “Run” area in PyCharm for both UDPServer and UDPClient, after you have successfully sent a message between the two.
 
-**Step 5**: Stop your Wireshark capture. Next, in Wireshark, identify the UDP packet(s) containing the message you sent in the prior step (i.e., the lowercase text). Right-click one of the two packets, and select Follow, then UDP Stream. Take a screenshot of the resulting Wireshark window.
+**Step 5**: Stop your Wireshark capture. Next, in Wireshark, identify the UDP packet(s) containing the message you sent in the prior step (i.e., the original text). Right-click one of the two packets, and select Follow, then UDP Stream. Take a screenshot of the resulting Wireshark window.
 
 **Question 2**: Post the screenshot described above.
 
@@ -127,7 +127,7 @@ It may take a few seconds, but before long you should see output which will tell
 
 **Step 4:** Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
 
-A tip for finding one of the TCP packets: In Wireshark, select "Edit" at the top of the screen, then "Find Packet…". Change the first pulldown to "Packet bytes" and the third to "String," as shown in the image below. Enter a search term that you know will be found, i.e., one of the words from the message that you sent in lower/upper case, and then hit "Find."
+A tip for finding one of the TCP packets: In Wireshark, select "Edit" at the top of the screen, then "Find Packet…". Change the first pulldown to "Packet bytes" and the third to "String," as shown in the image below. Enter a search term that you know will be found, i.e., one of the words from the message that you sent in plain text and scrambled text, and then hit "Find."
 
 ![Using Find Packet…](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/findPacket.png)
 
