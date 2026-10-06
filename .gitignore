@@ -7,3 +7,9 @@
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
+
+
+# Local lab credentials and Python caches
+lab4_config.json
+__pycache__/
+*.pyc
