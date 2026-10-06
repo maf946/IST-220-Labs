@@ -44,7 +44,8 @@ def ask_ai(name, major, config):
                 {'role': 'system', 'content': 'You write simple rhyming poems. Always respond with four lines of poetry.'},
                 {'role': 'user', 'content': f'Write a four-line poem about a college student named {name} who studies {major}. Mention {name} and {major} in the poem. Make up details about studying and learning new skills.'}]}
     request = urllib.request.Request(url, data=encode(body), headers={
-        'Content-Type': 'application/json', 'Authorization': f'Bearer {key}'})
+        'Content-Type': 'application/json', 'Authorization': f'Bearer {key}',
+        'User-Agent': 'IST220-Lab/1.0'})
     try:
         with urllib.request.build_opener(NoRedirect).open(request, timeout=110) as response:
             result = json.load(response)
