@@ -1,0 +1,5 @@
+{
+  "url": "https://ai220.m84.us/v1/chat/completions",
+  "model": "ist220-small",
+  "api_key": "PASTE_CLASS_KEY_HERE"
+}

@@ -1,142 +1,135 @@
-# Instructions for Lab 4 (Python Socket Scripts)
+# Lab 4: Poems over TCP and UDP
 
-Create your own Lab 4 Report document in Microsoft Word, and clearly label your answers for each of the questions defined below.
+In this lab, you will send your first name and major to a Python server and receive a short AI-generated poem. You will compare UDP and TCP traffic in Wireshark, then use Nmap to discover a partner's TCP server port.
 
-By the end of this lab, you’ll be able to:
+Your Python server forwards the request to a shared language model running on the instructor's computer. The model runs locally; no paid AI account is needed. The poem may be awkward or inaccurate. Its literary quality is not part of the assignment.
 
-* Develop a greater understanding for how packets use sockets and ports to communicate with arbitrary devices
-* Learn how to use Nmap for port scanning
+Complete your own lab and submit your own report. Work with a partner for the port-discovery activity, taking turns as client and server.
 
+## Before you begin
 
-## Section 1: Study Operation of UDP/TCP Client and Server
+You need Python 3.9 or newer, Wireshark (including Npcap on Windows), Nmap, the class API key from your instructor, and the Lab4 folder from this repository. Keep these files together in one folder:
 
-For this lab, you’ll be using four primary Python scripts:
+- `TCPClient.py`, `TCPServer.py`, `UDPClient.py`, `UDPServer.py`
+- `lab4_common.py`
+- `lab4_config.example.json`
 
+Open the folder as one project in your editor. You can also run everything from a terminal. Use `python3` on macOS; on Windows, use `py -3` in place of `python3` if necessary.
 
+Copy `lab4_config.example.json` to **`lab4_config.json`** in the same folder. Replace `PASTE_CLASS_KEY_HERE` in the copy with the key provided by your instructor. Keep the quotation marks and the other settings. Do not include this file or the key in your report, screenshots, or Git commits. The repository ignores the local configuration file.
 
-1. [UDPServer.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/UDPServer.py)
-2. [UDPClient.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/UDPClient.py)
-3. [TCPServer.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/TCPServer.py) 
-4. [TCPClient.py](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/TCPClient.py) 
+The **server** needs this configuration. The **client** does not need the key. Your computer needs Internet access when it runs a server because that server contacts the shared AI service.
 
-For this lab, you’ll be creating **four** PyCharm projects. Each project will have a main.py file. My suggestion is that you create the projects as follows:
+## How the application works
 
-1. A project called UDPServer. Replace the contents of main.py with the contents of UDPServer.py.
-2. A project called UDPClient. Replace the contents of main.py with the contents of UDPClient.py. When prompted, I suggest opening the project in a New Window.
-3. A project called TCPServer. Replace the contents of main.py with the contents of TCPServer.py. When prompted, I suggest opening the project in a New Window.
-4. A project called TCPClient. Replace the contents of main.py with the contents of TCPClient.py. When prompted, I suggest opening the project in a New Window.
+There are two separate network conversations:
 
-## Section 2: Inspecting UDP Traffic Through Wireshark
+| Conversation | Protocol | What is sent |
+|---|---|---|
+| Your client ↔ your Python server | UDP or TCP, depending on the script | Name, major, request ID, and poem as readable JSON |
+| Your Python server ↔ shared AI service | HTTPS | An authenticated poem request and the model's response |
 
-As seen in the last few labs, Wireshark will listen and document hundreds of different networking protocols. So far, we’ve seen HTTP and DNS, but in this lab, we will be focusing on the TCP and UDP packets that are being exchanged between the client and the server. 
+The first conversation is the one you will inspect in this lab. HTTPS on the second conversation does **not** encrypt the first. Use a first name and a major; do not send sensitive information.
 
-In this section, you’ll be launching Wireshark, then running UDPClient.py and UDPServer.py. 
+Each server asks the operating system for an available port and prints that port. Restarting it may change the port. Clients prompt for the server's IPv4 address and port before asking for your name and major.
 
-**Step 1:** Launch Wireshark.
+Each client runs one request and exits. Servers keep running until you press **Ctrl+C**. Allow up to two minutes for a response. The shared model serves a small number of requests slowly; coordinate with your instructor before retrying. The programs do not automatically retry requests.
 
-**Step 2**: Start sniffing the **loopback/lo0** interface.
+## Part 1: UDP on your own computer
 
-**Step 3**: Run the UDPServer project in PyCharm. Keep it running. Make a note of the serverIP and serverPort values visible in the “Run” portion of the PyCharm window, as in the screenshot below:
+1. Open a terminal in the Lab4 folder and run:
 
-![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/ServerIPandPortOutput.png?raw=true)
+   ```bash
+   python3 UDPServer.py
+   ```
 
-**Step 4**: While the UDPServer is still running, switch over to the UDPClient project in PyCharm. Replace the values for serverIP and serverPort in the source code with the values from the UDPServer. Make sure to keep the serverIP value in double quotes. Run the UDPClient, and send a message from the client to the server. You should receive a response in upper-case, as in the screenshot below:
+2. Record the printed port. Keep the server running.
+3. In Wireshark, select the **loopback** interface: usually `lo0` on macOS, or the Npcap loopback capture adapter on Windows. Both programs will use `127.0.0.1`, so your Wi-Fi interface is not the correct interface for this test.
+4. Start capturing. Enter a display filter using your actual server port, for example:
 
-![alt_text](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/UDPServerResponse.png?raw=true)
+   ```text
+   udp.port == 54321
+   ```
 
+5. In a second terminal in the same folder, run:
 
-**Question 1**: Post a screenshot of the “Run” area in PyCharm for both UDPServer and UDPClient, after you have successfully sent a message between the two.
+   ```bash
+   python3 UDPClient.py
+   ```
 
-**Step 5**: Stop your Wireshark capture. Next, in Wireshark, identify the UDP packet(s) containing the message you sent in the prior step (i.e., the original text). Right-click one of the two packets, and select Follow, then UDP Stream. Take a screenshot of the resulting Wireshark window.
+6. Accept the default server address `127.0.0.1`, enter the server's port, and enter your first name and major. Wait for the poem. Keep the output visible for your screenshot.
+7. Stop capturing. Select the request packet, then choose **Follow → UDP Stream**. Select a readable text view such as UTF-8. The JSON request contains `name`, `major`, and `request_id`. The response contains the same request ID and a `poem`. Newlines inside a JSON string appear as `\n`; this is expected.
+8. Examine the UDP headers of the request and response. Record both source and destination ports. Notice how the endpoints reverse direction.
 
-**Question 2**: Post the screenshot described above.
+**Question 1.** Include screenshots showing the UDP server's port and your client's inputs and poem. Explain which program is the client, which is the server, and why the client must know the server's address and port.
 
-## Section 3: TCP Port Scanning with a Friend
+**Question 2.** Include a Follow UDP Stream screenshot showing your request and response. Identify the source and destination ports in each direction. Explain what the request ID does at the application layer, and why receiving this response does not mean UDP guarantees delivery. Can someone capturing this client–server traffic read your name and major? Support your answer with your capture.
 
-In this section, you’ll be working with a friend (or at least a classmate… somebody other than yourself). You’ll use a port scan to find the TCP server on your friend’s machine, then connect to it. (And the friend will do the same, vice-versa; this lab is still an individual assignment).
+Stop the UDP server with Ctrl+C when finished.
 
-First, some table stakes:
+## Part 2: Find a partner's TCP port
 
-* We’ll be using the **nmap** port scanner. Make sure to read the following overview: [What is Nmap and How to Use It](https://www.freecodecamp.org/news/what-is-nmap-and-how-to-use-it-a-tutorial-for-the-greatest-scanning-tool-of-all-time/).
-* Now that you’re trained in the art and science of nmap, it’s safe for you to install it. Go ahead and install it:
-	* If you're on the Mac, [download nmap](https://nmap.org/download.html#macosx), run the installer by right-clicking it and selecting "Open", and then use nmap from the terminal.
-	* If you're on Windows, either:
-		* (easier) run `choco install nmap` in a Command Prompt or PowerShell window with administrator privileges
-   		* [download nmap](https://nmap.org/download.html#windows), run the installer, and install both nmap and Npcap. You can uncheck the box asking if you want to create a shortcut on your desktop.
+Only scan your consenting partner's computer and the port range shared for this activity. Do not scan other devices or wider ranges.
 
+1. Decide who will run the server first. The server partner runs:
 
-### When you’re acting as the server…
+   ```bash
+   python3 TCPServer.py
+   ```
 
-Follow one of the two subsections below.
+2. The server partner shares their **LAN IPv4 address** and a block of at most 100 ports containing the printed server port. Do not reveal the exact port yet. For example, if the port is `54637`, share `54600–54699`. For a port near the top of the range, use `65500–65535`; no port exceeds 65535.
+3. The client partner runs Nmap against that one address and range, substituting the actual values:
 
-##### If you and your partner are both connected to the PSU Wi-Fi network
+   ```bash
+   nmap --unprivileged -sT -Pn -n -p 54600-54699 192.168.1.25
+   ```
 
-Great, everything should work fine.
+   `-sT` requests a TCP connect scan; it does not require an administrator terminal. `-Pn` skips host discovery, and `-n` skips name resolution. The range after `-p` limits the scan.
 
-##### If you and your partner are not both connected to the PSU Wi-Fi network
+4. Identify the open port and check it with your partner. An Nmap service label is a guess based on port conventions; it does not establish what this Python application does. If multiple ports are open, have the server partner identify the lab port.
+5. Keep the server running. Do not restart it between discovery and the next part.
 
-In this situation, things are a bit more complicated. Please let me know if this applies to you, and I'll walk you through a few different approaches to dealing with the problem.
+**Question 3.** Provide your partner's name and course email, the exact Nmap command you ran, and a screenshot of its output. Identify the lab server's port and explain what Nmap's `open` result tells you. Explain why you cannot discover this TCP listener by scanning only UDP ports.
 
-<hr />
+### If the partner connection is blocked
 
-Provide your friend with the IPv4 address, but not the port number. Instead, make your friend earn it by giving them a range of 100 port numbers around the port number.[^1] For example:
+Being on the same Wi-Fi network does not guarantee that devices can reach each other. Check the LAN address and any prompt asking whether Python may accept incoming connections. Do not disable your firewall wholesale. If campus isolation or another restriction prevents the connection, ask your instructor to approve the fallback: run the TCP server locally and scan its announced range at `127.0.0.1`. Document the attempted partner test, the problem, and the approved fallback in your report.
 
-TCPServer.py port | Range to tell your friend 
------- | ------
-22434  | 22400-22499    
-23569  | 23500-23599   
-25121  | 25100-25199      
+## Part 3: Capture the TCP poem conversation
 
-Keep your TCP server running for the remainder of the exercise. 
+1. On the client computer, select the interface used to reach your partner: normally Wi-Fi or Ethernet. Use loopback only for the approved same-computer fallback.
+2. Start a **new capture** after the Nmap scan so the scan's connections do not clutter your application capture. Apply a filter using the actual server port:
 
-### When you’re acting as the client…
+   ```text
+   tcp.port == 54637
+   ```
 
-**Phase 1**: Your friend is being a real pain and is not giving you a specific port number[^2], so you’ll need to snoop/scan around and find the open port in the range provided. nmap seems like it would be handy here, so let’s use that.
+3. Run the client:
 
-Observe the following example usages:
+   ```bash
+   python3 TCPClient.py
+   ```
 
-OS | Command
------|-----
-macOS (run in Terminal) | `sudo nmap 159.203.126.35 -sS -p 22400-22499`
-Windows (run in Command Prompt as administrator; see more instructions below) | `nmap 159.203.126.35 -sS -p 22400-22499`
+4. Enter your partner's LAN IPv4 address and the discovered port, followed by your name and major. Wait for the response, then stop capturing.
+5. Select a packet in this connection and choose **Follow → TCP Stream**. Inspect the JSON request and poem. Close the stream window while keeping the selected stream filter to examine the packets in that connection.
+6. Find the connection's SYN, SYN/ACK, and ACK packets. Locate the application data and examine how the connection closes. Packet counts and the placement of acknowledgments can vary; do not expect one fixed number of packets.
+7. Switch roles so both partners run a client, discover a port, and capture their own exchange.
 
-	Windows Users: Opening the Command Prompt as Administrator
-	
-	1. Press the Windows Start button at the bottom left.
-	2. Type in "Command Prompt".
-	3. Right click on Command Prompt and click "Run as administrator".
-	4. Click Yes if the User Account Control prompt is displayed.
+**Question 4.** Include a Follow TCP Stream screenshot showing your poem exchange and a packet-list screenshot showing the connection setup. In one or two paragraphs, compare this exchange with UDP: connection setup, delivery and ordering, and how the application knows it has a complete message. Explain why a long wait for a poem is not, by itself, evidence of packet loss. Use observations from your captures.
 
-Run that command, replacing the IP address and port range as appropriate. The -sS option means you would like to run a stealth scan; a more detailed explanation of what this means is [available from the official nmap site](https://nmap.org/book/synscan.html).
+## Submit
 
-It may take a few seconds, but before long you should see output which will tell you the open port, and you should see a result like the below. You want to find ports where the STATE is “open.” There may be several in the range (as in the screenshot), but one of them will be your friend’s. You may have to try each of them until you succeed.
+Submit one report with labeled answers to Questions 1–4 and readable screenshots. Include enough packet-header detail to support your port comparisons. Do not submit the class key or `lab4_config.json`. Follow your instructor's directions for the report format and due date.
 
-![nmap output](https://github.com/maf946/IST-220-Labs/blob/main/Lab4/Images/nmap.png?raw=true)
+## Troubleshooting
 
-**Question 3**: Post a screenshot of the nmap command and output. Also include the full name and Penn State email address of the friend who was acting as the server.
+| Symptom | What to check |
+|---|---|
+| Missing configuration or rejected class key | Check the local filename, JSON syntax, and key supplied by your instructor. Never paste the key into a help screenshot. |
+| No matching packets | Check the capture interface, current server port, and whether capture started before running the client. |
+| Connection refused | Check that the correct server is still running and that you used its current port. |
+| Timeout, HTTP 503, or gateway error | The model may be loading or busy. Tell your instructor; avoid repeatedly submitting requests. |
+| Nmap shows filtered ports | Check the address, network isolation, and firewall permissions with your instructor. |
+| Poem has the wrong number of lines or odd wording | That is acceptable. The lab examines networking behavior, not model quality. |
 
-**Phase 2**: Now that you’ve found out how to sneak in to your very rude friend’s server, it’s time to go ahead and do that
-
-**Step 1:** In Wireshark, start a capture on your primary interface (not the loopback interface).
-
-**Step 2:** Use the TCP client to connect to the TCP server on the appropriate port. You’ll need to modify the serverIP and serverPort values appropriately. 
-
-**Step 3**: Send a message to the server, and observe the result coming back. You should see a result like the below:
-
-![TCP Remote Client](https://raw.githubusercontent.com/maf946/IST-220-Labs/refs/heads/main/Lab4/Images/TCPRemoteClient.png)
-
-**Step 4:** Stop the Wireshark capture. Locate any of the packets corresponding to the TCP connection described here, and right-click it. Select “Follow,” then “TCP Stream.” A new window will open, which is mostly a large text area with encrypted text. 
-
-A tip for finding one of the TCP packets: In Wireshark, select "Edit" at the top of the screen, then "Find Packet…". Change the first pulldown to "Packet bytes" and the third to "String," as shown in the image below. Enter a search term that you know will be found, i.e., one of the words from the message that you sent in plain text and scrambled text, and then hit "Find."
-
-![Using Find Packet…](https://raw.githubusercontent.com/maf946/IST-220-Labs/main/Lab4/Images/findPacket.png)
-
-**Step 5:** Close the new window, and observe that the Wireshark filter is set to a particular TCP stream (ex: “tcp.stream eq 0”). Based on what you now know about the TCP segment structure, explore this list of 10 or so packets.
-
-**Question 4**: Post a screenshot of the Wireshark window with the appropriate filter set. In a well-written paragraph, explain what is happening across the course of the TCP stream. Hint: not all of the packets are for transporting the message you typed into the terminal. There is a lot of other plumbing that is happening behind the scenes, and which is now exposed to you in Wireshark.
-
-[^1]:
-     Perhaps this is why I do not have more friends.
-
-[^2]:
-     You should find some new friends who really honor port transparency.
+For details about the code, see [SocketScriptsOverview.md](SocketScriptsOverview.md).

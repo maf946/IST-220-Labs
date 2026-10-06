@@ -1,15 +1,5 @@
-import socket
+"""Run this client in a separate terminal from the server."""
+from lab4_common import main, run_client
 
-serverIP = "192.168.0.19" #replace this number
-serverPort = 54667 #replace this number
-
-print("I'm configured to send UDP packets to " + serverIP + " on port " + str(serverPort))
-print ("Press Ctrl+C to quit.")
-
-while 1:	
-	clientSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)		
-	message = input("Input text to scramble: ")
-	clientSocket.sendto(message.encode(), (serverIP, serverPort))
-	modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
-	print ("Returned from server: " + modifiedMessage.decode())
-	clientSocket.close()
+if __name__ == '__main__':
+    main(run_client, 'UDP')
