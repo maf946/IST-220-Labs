@@ -4,10 +4,10 @@ All programs use Python's standard library. The four short entry-point files sel
 
 ## One request, two network conversations
 
-The client prompts for a numeric IPv4 address, port, first name, and major. It creates a random request ID and sends a UTF-8 JSON object:
+The client prompts for a numeric IPv4 address, port, first name, and hobby. It creates a random request ID and sends a UTF-8 JSON object:
 
 ```json
-{"request_id":"example-id","name":"Alex","major":"Cybersecurity"}
+{"request_id":"example-id","name":"Alex","hobby":"stargazing"}
 ```
 
 The Python server validates the request, then sends a separate HTTPS POST to the shared AI service. It includes the class key in that HTTPS request's Authorization header. The key never belongs in the student client's message.
@@ -38,6 +38,6 @@ An empty connection from a port scan is closed without contacting the model. An 
 
 ## Timing and limits
 
-The shared AI request has a 110-second socket timeout; student clients wait up to 120 seconds for socket operations. These are network operation timeouts, not strict guarantees of total wall-clock duration. Proxies may impose their own limits. Name and major lengths are bounded, and messages are limited to 4,096 bytes. The server does not retry or grade poem quality.
+The shared AI request has a 110-second socket timeout; student clients wait up to 120 seconds for socket operations. These are network operation timeouts, not strict guarantees of total wall-clock duration. Proxies may impose their own limits. Name and hobby lengths are bounded, and messages are limited to 4,096 bytes. The server does not retry or grade poem quality.
 
 The student-to-Python-server exchange is readable plaintext over either protocol. The Python-server-to-AI exchange uses HTTPS. Capture the correct interface and port to distinguish them.

@@ -33,7 +33,7 @@ class ProtocolTests(unittest.TestCase):
             self.assertIsNone(lab.receive_line(reader))
 
     def test_response_size_and_unicode(self):
-        request = {'request_id': 'abc', 'name': 'Alex', 'major': 'Computing'}
+        request = {'request_id': 'abc', 'name': 'Alex', 'hobby': 'painting'}
         with patch.object(lab, 'ask_ai', return_value=('🌟\n' * 1000, {})):
             raw = lab.reply_for(lab.encode(request), ('unused', 'SECRET', 'unused'))
         result = json.loads(raw)
@@ -59,7 +59,7 @@ class IntegrationTests(unittest.TestCase):
                 if self.headers.get('Authorization') != 'Bearer TEST-KEY':
                     self.send_error(401)
                     return
-                payload = lab.encode({'choices': [{'message': {'content': 'Alex studies Cybersecurity.\nA poem arrives.'}}], 'usage': {'completion_tokens': 10}})
+                payload = lab.encode({'choices': [{'message': {'content': 'Alex enjoys stargazing.\nA poem arrives.'}}], 'usage': {'completion_tokens': 10}})
                 self.send_response(200)
                 self.send_header('Content-Length', str(len(payload)))
                 self.end_headers()
@@ -79,7 +79,7 @@ class IntegrationTests(unittest.TestCase):
 
     def test_authentication_error(self):
         with self.assertRaisesRegex(ValueError, 'rejected the class key'):
-            lab.ask_ai('Alex', 'Computing', (self.url, 'wrong', 'test'))
+            lab.ask_ai('Alex', 'painting', (self.url, 'wrong', 'test'))
 
     def test_both_real_servers_and_clients(self):
         import os
@@ -98,7 +98,7 @@ class IntegrationTests(unittest.TestCase):
                     if protocol == 'TCP':
                         with socket.create_connection(('127.0.0.1', port), timeout=2):
                             pass
-                    result = subprocess.run([sys.executable, str(LAB / f'{protocol}Client.py')], input=f'127.0.0.1\n{port}\nAlex\nCybersecurity\n', capture_output=True, text=True, env=env, timeout=10)
+                    result = subprocess.run([sys.executable, str(LAB / f'{protocol}Client.py')], input=f'127.0.0.1\n{port}\nAlex\nstargazing\n', capture_output=True, text=True, env=env, timeout=10)
                     self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
                     self.assertIn('A poem arrives.', result.stdout)
                     self.assertNotIn('TEST-KEY', result.stdout)

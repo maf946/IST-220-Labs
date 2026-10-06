@@ -37,12 +37,12 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
-def ask_ai(name, major, config):
+def ask_ai(name, hobby, config):
     url, key, model = config
     body = {'model': model, 'stream': False, 'max_tokens': 100, 'temperature': 0.7,
             'messages': [
                 {'role': 'system', 'content': 'You write simple rhyming poems. Always respond with four lines of poetry.'},
-                {'role': 'user', 'content': f'Write a four-line poem about a college student named {name} who studies {major}. Mention {name} and {major} in the poem. Make up details about studying and learning new skills.'}]}
+                {'role': 'user', 'content': f'Write a four-line poem about a college student named {name} who enjoys {hobby}. Mention {name} and {hobby} in the poem. Make the poem about enjoying this hobby and learning new skills.'}]}
     request = urllib.request.Request(url, data=encode(body), headers={
         'Content-Type': 'application/json', 'Authorization': f'Bearer {key}',
         'User-Agent': 'IST220-Lab/1.0'})
@@ -64,7 +64,7 @@ def ask_ai(name, major, config):
 def validate(request):
     if not isinstance(request, dict):
         raise ValueError('Request must be a JSON object.')
-    for field, limit in (('request_id', 32), ('name', 40), ('major', 80)):
+    for field, limit in (('request_id', 32), ('name', 40), ('hobby', 80)):
         value = request.get(field)
         if not isinstance(value, str) or not value.strip() or len(value) > limit or any(ord(c) < 32 for c in value):
             raise ValueError(f'{field} must contain 1–{limit} printable characters.')
@@ -78,8 +78,8 @@ def reply_for(data, config):
             raise ValueError('Request is too large.')
         request = validate(json.loads(data))
         request_id = request['request_id']
-        print(f"Request from {request['name']} ({request['major']})", flush=True)
-        poem, _ = ask_ai(request['name'], request['major'], config)
+        print(f"Request from {request['name']} ({request['hobby']})", flush=True)
+        poem, _ = ask_ai(request['name'], request['hobby'], config)
         reply = {'request_id': request_id, 'ok': True, 'poem': poem}
         # Bound both transports to one small application response. JSON escaping counts.
         while len(encode(reply)) > UDP_LIMIT:
@@ -150,7 +150,7 @@ def run_client(transport):
         raise ValueError('Port must be between 1 and 65535.')
     request = validate({'request_id': uuid.uuid4().hex,
                         'name': input('Your first name: ').strip(),
-                        'major': input('Your major: ').strip()})
+                        'hobby': input('Your hobby: ').strip()})
     kind = socket.SOCK_STREAM if transport == 'TCP' else socket.SOCK_DGRAM
     with socket.socket(socket.AF_INET, kind) as client:
         client.settimeout(CLIENT_TIMEOUT)

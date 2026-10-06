@@ -1,6 +1,6 @@
 # Lab 4: Poems over TCP and UDP
 
-In this lab, you will send your first name and major to a Python server and receive a short AI-generated poem. You will compare UDP and TCP traffic in Wireshark, then use Nmap to discover a partner's TCP server port.
+In this lab, you will send your first name and hobby to a Python server and receive a short AI-generated poem. You will compare UDP and TCP traffic in Wireshark, then use Nmap to discover a partner's TCP server port.
 
 Your Python server forwards the request to a shared language model running on the instructor's computer. The model runs locally; no paid AI account is needed. The poem may be awkward or inaccurate. Its literary quality is not part of the assignment.
 
@@ -26,12 +26,12 @@ There are two separate network conversations:
 
 | Conversation | Protocol | What is sent |
 |---|---|---|
-| Your client ↔ your Python server | UDP or TCP, depending on the script | Name, major, request ID, and poem as readable JSON |
+| Your client ↔ your Python server | UDP or TCP, depending on the script | Name, hobby, request ID, and poem as readable JSON |
 | Your Python server ↔ shared AI service | HTTPS | An authenticated poem request and the model's response |
 
-The first conversation is the one you will inspect in this lab. HTTPS on the second conversation does **not** encrypt the first. Use a first name and a major; do not send sensitive information.
+The first conversation is the one you will inspect in this lab. HTTPS on the second conversation does **not** encrypt the first. Use a first name and a hobby; do not send sensitive information.
 
-Each server asks the operating system for an available port and prints that port. Restarting it may change the port. Clients prompt for the server's IPv4 address and port before asking for your name and major.
+Each server asks the operating system for an available port and prints that port. Restarting it may change the port. Clients prompt for the server's IPv4 address and port before asking for your name and hobby.
 
 Each client runs one request and exits. Servers keep running until you press **Ctrl+C**. Allow up to two minutes for a response. The shared model serves a small number of requests slowly; coordinate with your instructor before retrying. The programs do not automatically retry requests.
 
@@ -57,13 +57,13 @@ Each client runs one request and exits. Servers keep running until you press **C
    python3 UDPClient.py
    ```
 
-6. Accept the default server address `127.0.0.1`, enter the server's port, and enter your first name and major. Wait for the poem. Keep the output visible for your screenshot.
-7. Stop capturing. Select the request packet, then choose **Follow → UDP Stream**. Select a readable text view such as UTF-8. The JSON request contains `name`, `major`, and `request_id`. The response contains the same request ID and a `poem`. Newlines inside a JSON string appear as `\n`; this is expected.
+6. Accept the default server address `127.0.0.1`, enter the server's port, and enter your first name and hobby. Wait for the poem. Keep the output visible for your screenshot.
+7. Stop capturing. Select the request packet, then choose **Follow → UDP Stream**. Select a readable text view such as UTF-8. The JSON request contains `name`, `hobby`, and `request_id`. The response contains the same request ID and a `poem`. Newlines inside a JSON string appear as `\n`; this is expected.
 8. Examine the UDP headers of the request and response. Record both source and destination ports. Notice how the endpoints reverse direction.
 
 **Question 1.** Include screenshots showing the UDP server's port and your client's inputs and poem. Explain which program is the client, which is the server, and why the client must know the server's address and port.
 
-**Question 2.** Include a Follow UDP Stream screenshot showing your request and response. Identify the source and destination ports in each direction. Explain what the request ID does at the application layer, and why receiving this response does not mean UDP guarantees delivery. Can someone capturing this client–server traffic read your name and major? Support your answer with your capture.
+**Question 2.** Include a Follow UDP Stream screenshot showing your request and response. Identify the source and destination ports in each direction. Explain what the request ID does at the application layer, and why receiving this response does not mean UDP guarantees delivery. Can someone capturing this client–server traffic read your name and hobby? Support your answer with your capture.
 
 Stop the UDP server with Ctrl+C when finished.
 
@@ -110,7 +110,7 @@ Being on the same Wi-Fi network does not guarantee that devices can reach each o
    python3 TCPClient.py
    ```
 
-4. Enter your partner's LAN IPv4 address and the discovered port, followed by your name and major. Wait for the response, then stop capturing.
+4. Enter your partner's LAN IPv4 address and the discovered port, followed by your name and hobby. Wait for the response, then stop capturing.
 5. Select a packet in this connection and choose **Follow → TCP Stream**. Inspect the JSON request and poem. Close the stream window while keeping the selected stream filter to examine the packets in that connection.
 6. Find the connection's SYN, SYN/ACK, and ACK packets. Locate the application data and examine how the connection closes. Packet counts and the placement of acknowledgments can vary; do not expect one fixed number of packets.
 7. Switch roles so both partners run a client, discover a port, and capture their own exchange.

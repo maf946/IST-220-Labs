@@ -15,7 +15,7 @@ def main():
     def request(name):
         started = time.monotonic()
         try:
-            poem, result = ask_ai(name, 'Cybersecurity', config)
+            poem, result = ask_ai(name, 'stargazing', config)
             return name, True, time.monotonic() - started, f"HTTP 200; {result.get('usage', {}).get('completion_tokens', '?')} tokens\n{poem}"
         except ValueError as error:
             return name, False, time.monotonic() - started, str(error)
