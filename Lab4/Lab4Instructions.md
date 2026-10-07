@@ -18,7 +18,30 @@ By the end, you should be able to identify socket endpoints, distinguish transpo
 
 ## Before you begin
 
-You need Python 3.9 or newer, Wireshark (including Npcap on Windows), Nmap, the class API key from your instructor, and the Lab4 folder from this repository. Download the version supplied by your instructor, extract it if it is a ZIP, and keep these files together in its `Lab4` folder:
+You need Python 3.9 or newer, Wireshark (including Npcap on Windows), Nmap, the class API key from your instructor, and the Lab4 folder from this repository.
+
+### Download and extract the lab files
+
+**Easiest option: [Download the lab ZIP](https://github.com/maf946/IST-220-Labs/archive/refs/heads/lab4-ai-poems.zip).** No GitHub account, Git installation, or GitHub Desktop is needed.
+
+If you prefer to download through GitHub’s menus:
+
+1. Open the [lab repository on the `lab4-ai-poems` branch](https://github.com/maf946/IST-220-Labs/tree/lab4-ai-poems).
+2. At the top of the repository’s file list, confirm that the branch selector says **`lab4-ai-poems`**. This is the version used by these instructions.
+3. Click the green **Code** button, then **Download ZIP**. If the menu has tabs, select **Local** first. Use the repository page linked above; the button is not on an individual file’s page.
+
+After the download finishes:
+
+| Operating system | Extract the ZIP |
+|---|---|
+| macOS | Find the ZIP in Downloads and double-click it. If your browser already extracted it, use the resulting folder. |
+| Windows | Find the ZIP in Downloads, right-click it, choose **Extract All…**, and click **Extract**. Open the extracted folder, not the ZIP’s preview. |
+
+Open the extracted **`IST-220-Labs-lab4-ai-poems`** folder and locate **`Lab4`** inside it. The ZIP includes the whole repository; you only need the Lab4 folder for this assignment. Move the extracted folder somewhere you can find again, such as your course folder in Documents.
+
+When you open PyCharm below, select the **extracted `Lab4` folder** as your project. Do not open the ZIP itself, download scripts one at a time, or copy code from the GitHub webpage.
+
+Keep these files together in `Lab4`:
 
 - `TCPClient.py`, `TCPServer.py`, `UDPClient.py`, `UDPServer.py`
 - `lab4_common.py`

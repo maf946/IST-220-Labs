@@ -30,6 +30,8 @@ Requests include `User-Agent: IST220-Lab/1.0`. The earlier default Python reques
 
 ## Distribution
 
+The student instructions currently link to the ZIP for the `lab4-ai-poems` branch. Before deleting that branch after a merge, update both the direct ZIP link and the repository/branch directions to the branch or release students should use.
+
 Give students the entire Lab4 folder and distribute the class key through your course's private channel. Do not commit the actual configuration or key. The key grants access to this local service; rotate it if it is exposed. Student clients do not need it, but each student running a server does.
 
 The new instructions preserve four report questions: UDP operation, UDP packet evidence, partner TCP port discovery, and TCP/UDP comparison. Poems are intentionally short, and errors or imperfect wording are not a reason to tune the model during the lab.
