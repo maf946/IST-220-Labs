@@ -1,6 +1,6 @@
 # Instructor notes: shared local poem service
 
-The student programs default to `https://ai220.m84.us/v1/chat/completions`, model alias `ist220-small`. They use only the Python standard library. The shared service is a local llama.cpp server on Avar behind Caddy and Cloudflare; no paid AI provider is involved.
+The student programs default to `https://ai220.m84.us/v1/chat/completions`, model alias `ist220-small`. They use Python’s standard library plus certifi for HTTPS certificate verification. Install requirements into the interpreter running the student server or load test with `python3 -m pip install --upgrade -r requirements.txt` from Lab4. The shared service is a local llama.cpp server on Avar behind Caddy and Cloudflare; no paid AI provider is involved.
 
 ## Existing Avar configuration
 
@@ -27,6 +27,8 @@ A successful run exits with status 0 and reports `Completed: 3/3`. Check elapsed
 Then configure one student server using a copy of `lab4_config.example.json`, run each server/client pair locally, and verify a Wireshark capture. Test one partner connection on the actual classroom network. Campus client isolation can block peer traffic even when the public AI endpoint works.
 
 Requests include `User-Agent: IST220-Lab/1.0`. The earlier default Python requests received HTTP 403 from the public endpoint; a manual request with this application header and the updated public load test succeeded. Keep the updated helper when distributing the lab.
+
+A Windows PyCharm environment could not verify the service certificate using its default trust store. A connection test using certifi succeeded on October 7; the shared helper now explicitly uses this bundle while retaining certificate and hostname verification.
 
 ## Distribution
 

@@ -41,6 +41,19 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(result['truncated'])
         self.assertNotIn(b'SECRET', raw)
 
+    def test_https_trust_and_certificate_error(self):
+        import ssl
+        import urllib.error
+        with patch.object(lab.urllib.request, 'build_opener') as build:
+            build.return_value.open.side_effect = urllib.error.URLError(
+                ssl.SSLCertVerificationError(1, 'untrusted test certificate'))
+            with self.assertRaisesRegex(ValueError, 'HTTPS certificate verification failed'):
+                lab.ask_ai('Alex', 'painting', ('https://example.test', 'TEST-KEY', 'test'))
+            handler = build.call_args.args[1]
+            self.assertEqual(handler._context.verify_mode, ssl.CERT_REQUIRED)
+            self.assertTrue(handler._context.check_hostname)
+            self.assertGreater(handler._context.cert_store_stats()['x509_ca'], 0)
+
     def test_invalid_request_does_not_call_ai(self):
         with patch.object(lab, 'ask_ai') as ask:
             for data in (b'not json', b'[]', b'{}', b'\xff', b'x' * 4097):

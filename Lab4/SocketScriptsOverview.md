@@ -1,6 +1,6 @@
 # How the poem socket programs work
 
-All programs use Python's standard library. The four short entry-point files select TCP or UDP and client or server behavior. The implementation is in `lab4_common.py`; read that file when tracing socket calls.
+The socket programs use Python's standard library; the HTTPS helper also uses certifi's trusted certificate bundle. Install certifi into the project interpreter as explained in the lab instructions. Clients alone do not call the HTTPS helper. The four short entry-point files select TCP or UDP and client or server behavior. The implementation is in `lab4_common.py`; read that file when tracing socket calls.
 
 ## One request, two network conversations
 

@@ -46,6 +46,7 @@ Keep these files together in `Lab4`:
 - `TCPClient.py`, `TCPServer.py`, `UDPClient.py`, `UDPServer.py`
 - `lab4_common.py`
 - `lab4_config.example.json`
+- `requirements.txt`
 
 ### Install PyCharm
 
@@ -72,10 +73,25 @@ If the current release does not support your operating system, consult your inst
 2. Select the extracted **Lab4 folder**, not one individual `.py` file. Open it as one project. If asked whether to trust it, confirm only after checking that it is the course-provided folder.
 3. In the Project pane, confirm that all four client/server scripts and `lab4_common.py` are visible. Do not create a separate project for each script. Use matching versions on both partners’ computers.
 4. Check the project’s Python interpreter. Open **PyCharm → Settings** on macOS or **File → Settings** on Windows, then search for **Python Interpreter**. Select a local Python 3.9-or-newer interpreter supported by your PyCharm version. If one is already selected and works, keep it.
-5. If none is configured, choose **Add Interpreter → Add Local Interpreter** (wording can vary by version). Select an installed Python 3 interpreter, or create a virtual environment using that interpreter as its base. Accepting a project `.venv` is fine; these scripts require no extra packages. If Python is not installed, use [python.org/downloads](https://www.python.org/downloads/) to install Python 3 for your operating system, then return to interpreter selection. PyCharm is the editor; Python is what executes your scripts.
-6. Finish the class-key configuration below **before starting a server**.
+5. If none is configured, choose **Add Interpreter → Add Local Interpreter** (wording can vary by version). Select an installed Python 3 interpreter, or create a virtual environment using that interpreter as its base. Accepting a project `.venv` is fine; install the certificate package into that environment using the next steps. If Python is not installed, use [python.org/downloads](https://www.python.org/downloads/) to install Python 3 for your operating system, then return to interpreter selection. PyCharm is the editor; Python is what executes your scripts.
+6. Install the certificate package and finish the class-key configuration below **before starting a server**.
 
 JetBrains provides additional help for [configuring a Python interpreter](https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html).
+
+### Install the certificate package
+
+The student server uses **certifi**, a bundle of trusted certificate authorities, to verify the shared AI service’s HTTPS certificate. Install it in the **same Python interpreter you selected for this project**. Keep HTTPS certificate verification enabled.
+
+In PyCharm, open **Settings → Python Interpreter**, use the package installation control (often a **+** button), search for **certifi**, and install it. If it is already installed, update it. This method works on both Mac and Windows and targets the selected project interpreter.
+
+Alternatively, if your project uses a `.venv` folder inside Lab4, open a terminal in Lab4 and run the matching command:
+
+| Environment | Install command |
+|---|---|
+| macOS project `.venv` | `./.venv/bin/python -m pip install --upgrade -r requirements.txt` |
+| Windows PowerShell project `.venv` | `& ".\.venv\Scripts\python.exe" -m pip install --upgrade -r requirements.txt` |
+
+If your interpreter is stored somewhere else, use the PyCharm package installation method above. Installing into a different Python environment will not fix this project. If installation fails, share the error with your instructor.
 
 ### Run a server and client at the same time in PyCharm
 
@@ -108,7 +124,7 @@ To use terminals inside PyCharm, select **View → Tool Windows → Terminal**. 
 | Start TCP server | `python3 TCPServer.py` | `py -3 TCPServer.py` |
 | Start TCP client | `python3 TCPClient.py` | `py -3 TCPClient.py` |
 
-Check Nmap with `nmap --version`. If Python, Nmap, or Wireshark is missing, complete your instructor’s software setup before continuing. No extra Python packages or `pip install` commands are required. The numbered steps show macOS commands; use the Windows equivalents above when appropriate.
+Check Nmap with `nmap --version`. If Python, Nmap, or Wireshark is missing, complete your instructor’s software setup before continuing. The only additional Python package required is certifi, installed above. The numbered steps show macOS commands; use the Windows equivalents above when appropriate.
 
 ### Configure the class key
 
@@ -279,6 +295,7 @@ Screenshots must be readable and should show only the relevant application windo
 | Typing does not answer the client’s prompts | Click the client’s Run output area; do not type in the server tab or Python Console. |
 | Starting the client stops the server | Cancel any rerun prompt, then right-click the client file and select its Run action. |
 | Python cannot find the script or `lab4_common` | Open the terminal in Lab4 and keep all supplied Python files together. |
+| Missing certifi or certificate verification failed | Install or update certifi in the project interpreter, then restart the server. If verification still fails, contact your instructor. |
 | HTTP 403 | Check that you have the current supplied code, then report the error to your instructor. |
 | No matching packets | Check the capture interface, current server port, and whether capture started before running the client. |
 | Connection refused | Check that the correct server is still running and that you used its current port. |

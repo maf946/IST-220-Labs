@@ -1,8 +1,9 @@
-"""Shared protocol and AI-service helpers; uses only Python's standard library."""
+"""Shared protocol and AI-service helpers; uses certifi for HTTPS certificate trust."""
 import json
 import os
 from pathlib import Path
 import socket
+import ssl
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -38,6 +39,11 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 def ask_ai(name, hobby, config):
+    try:
+        import certifi
+    except ImportError:
+        raise ValueError('Install certifi in the Python environment running this server: python -m pip install certifi') from None
+    context = ssl.create_default_context(cafile=certifi.where())
     url, key, model = config
     body = {'model': model, 'stream': False, 'max_tokens': 100, 'temperature': 0.7,
             'messages': [
@@ -47,7 +53,7 @@ def ask_ai(name, hobby, config):
         'Content-Type': 'application/json', 'Authorization': f'Bearer {key}',
         'User-Agent': 'IST220-Lab/1.0'})
     try:
-        with urllib.request.build_opener(NoRedirect).open(request, timeout=110) as response:
+        with urllib.request.build_opener(NoRedirect, urllib.request.HTTPSHandler(context=context)).open(request, timeout=110) as response:
             result = json.load(response)
         poem = result['choices'][0]['message']['content']
         if not isinstance(poem, str) or not poem.strip():
@@ -57,6 +63,12 @@ def ask_ai(name, hobby, config):
         if error.code == 401:
             raise ValueError('AI service rejected the class key.') from None
         raise ValueError(f'AI service returned HTTP {error.code}; ask your instructor before trying again.') from None
+    except urllib.error.URLError as error:
+        if isinstance(error.reason, ssl.SSLCertVerificationError):
+            raise ValueError('HTTPS certificate verification failed. Update certifi in the server Python environment; if it persists, contact your instructor.') from None
+        raise ValueError('Could not connect to the AI service. Check Internet access and the service URL.') from None
+    except ssl.SSLCertVerificationError:
+        raise ValueError('HTTPS certificate verification failed. Update certifi in the server Python environment.') from None
     except (OSError, ValueError, KeyError, IndexError, TypeError):
         raise ValueError('AI service timed out, was unreachable, or returned an invalid response.') from None
 
