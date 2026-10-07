@@ -24,9 +24,58 @@ You need Python 3.9 or newer, Wireshark (including Npcap on Windows), Nmap, the 
 - `lab4_common.py`
 - `lab4_config.example.json`
 
-Open **Lab4 as one project** in PyCharm or another editor. Do not create a separate project for each script. The short client and server files import `lab4_common.py`, so keep them together and use matching versions on both partners’ computers.
+### Install PyCharm
 
-The steps below use terminals. Open a terminal in the Lab4 folder; a terminal in its parent folder will not find the scripts. In PyCharm, use the Terminal tab and open a second terminal tab when needed. You can also run the scripts in separate Run tabs, provided the server stays running while you start the client.
+If PyCharm already runs Python programs on your computer, skip installation and open the lab folder below. This lab uses PyCharm’s **free core features**. The current download combines the former Community Edition and optional Pro features; you do not need to purchase a subscription or activate an AI assistant for this lab.
+
+**macOS**
+
+1. Visit the [official PyCharm download page](https://www.jetbrains.com/pycharm/download/) and select **macOS**.
+2. Choose **Apple Silicon** for an M-series Mac, or **Intel** for an Intel Mac. Check **Apple menu → About This Mac** if unsure.
+3. Open the downloaded `.dmg` and drag **PyCharm** into **Applications**.
+4. Launch PyCharm from Applications and complete the first-launch prompts.
+
+**Windows**
+
+1. Visit the [official PyCharm download page](https://www.jetbrains.com/pycharm/download/) and select **Windows**. Use the standard x64 installer for most PCs; select ARM64 only for an ARM-based PC.
+2. Run the downloaded `.exe` and follow the installer. The default options are sufficient; a desktop shortcut is optional.
+3. Launch PyCharm from the Start menu and complete the first-launch prompts.
+
+If the current release does not support your operating system, consult your instructor before choosing an older release. See JetBrains’ [installation guide and system requirements](https://www.jetbrains.com/help/pycharm/installation-guide.html).
+
+### Open the lab and select Python
+
+1. On PyCharm’s welcome screen, click **Open**. If another project is already open, use **File → Open**.
+2. Select the extracted **Lab4 folder**, not one individual `.py` file. Open it as one project. If asked whether to trust it, confirm only after checking that it is the course-provided folder.
+3. In the Project pane, confirm that all four client/server scripts and `lab4_common.py` are visible. Do not create a separate project for each script. Use matching versions on both partners’ computers.
+4. Check the project’s Python interpreter. Open **PyCharm → Settings** on macOS or **File → Settings** on Windows, then search for **Python Interpreter**. Select a local Python 3.9-or-newer interpreter supported by your PyCharm version. If one is already selected and works, keep it.
+5. If none is configured, choose **Add Interpreter → Add Local Interpreter** (wording can vary by version). Select an installed Python 3 interpreter, or create a virtual environment using that interpreter as its base. Accepting a project `.venv` is fine; these scripts require no extra packages. If Python is not installed, use [python.org/downloads](https://www.python.org/downloads/) to install Python 3 for your operating system, then return to interpreter selection. PyCharm is the editor; Python is what executes your scripts.
+6. Finish the class-key configuration below **before starting a server**.
+
+JetBrains provides additional help for [configuring a Python interpreter](https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html).
+
+### Run a server and client at the same time in PyCharm
+
+Use **two separate Run tabs in the same project**. Start the server first and leave it running while the client sends its request. You do not need two PyCharm windows or to start all four scripts at once.
+
+For the local UDP activity:
+
+1. Right-click **`UDPServer.py`** in the Project pane and select **Run 'UDPServer'**. The Run tool window opens and prints the port. A server that is waiting quietly is working normally; it should not finish yet.
+2. Leave that process running. Start the Wireshark capture as directed in Part 1.
+3. Right-click **`UDPClient.py`** and select **Run 'UDPClient'**. Its output appears in a separate Run tab. Use the file’s right-click menu so you do not accidentally rerun the server with the toolbar’s currently selected configuration.
+4. Click inside the **UDPClient** output area to type answers. Press Enter to accept `127.0.0.1`, then type the server’s printed port, your first name, and your hobby, pressing Enter after each answer. Do not type these inputs into the server tab or Python Console.
+5. Switch between **UDPServer** and **UDPClient** tabs to inspect their output. The client finishes after printing the poem; the server stays available. Run the client again only when the lab asks you to make another request.
+6. When finished, select the **server’s** Run tab and click its red **Stop** button. In a terminal, use Ctrl+C instead.
+
+For TCP, follow the same pattern with **`TCPServer.py`** and **`TCPClient.py`**. During the partner activity, the server runs in your partner’s PyCharm while the client runs in yours. Keep the partner’s server running throughout the scan and poem request, then switch roles.
+
+If PyCharm asks to stop or rerun an already-running server when you meant to start a client, **cancel** and right-click the correct client file. Restarting the server may change its port. Separate client and server configurations can run concurrently; you do not need to enable multiple copies of the same configuration. See [JetBrains’ run instructions](https://www.jetbrains.com/help/pycharm/running-applications.html).
+
+### Alternative: two terminal tabs
+
+The numbered lab steps below show terminal commands. You may use the equivalent right-click **Run** actions above instead; complete the same inputs and Wireshark steps.
+
+To use terminals inside PyCharm, select **View → Tool Windows → Terminal**. Ensure it is in the Lab4 folder. Run the server in the first terminal tab, then use the terminal’s **+** button to open a second terminal session and run the client there. Leave the first tab running. A terminal occupied by a running server cannot also accept a client launch command. The same approach works with two separate operating-system terminal windows.
 
 | Task | macOS terminal | Windows PowerShell |
 |---|---|---|
@@ -199,6 +248,9 @@ Screenshots must be readable and should show only the relevant application windo
 |---|---|
 | Missing configuration or rejected class key | Check the local filename, JSON syntax, and key supplied by your instructor. Never paste the key into a help screenshot. |
 | Client still asks for a major, or reports a missing hobby | Obtain the current Lab4 folder on both computers and restart the server. The current version asks for a hobby. |
+| PyCharm says no interpreter is configured | Select a local Python interpreter in Settings as described above. |
+| Typing does not answer the client’s prompts | Click the client’s Run output area; do not type in the server tab or Python Console. |
+| Starting the client stops the server | Cancel any rerun prompt, then right-click the client file and select its Run action. |
 | Python cannot find the script or `lab4_common` | Open the terminal in Lab4 and keep all supplied Python files together. |
 | HTTP 403 | Check that you have the current supplied code, then report the error to your instructor. |
 | No matching packets | Check the capture interface, current server port, and whether capture started before running the client. |
