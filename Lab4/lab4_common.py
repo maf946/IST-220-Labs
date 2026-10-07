@@ -169,11 +169,16 @@ def run_client(transport):
         client.connect((address, port))
         if transport == 'TCP':
             client.sendall(encode(request) + b'\n')
-            raw = receive_line(client)
         else:
             # Connected UDP selects a peer; it does not perform a handshake.
             client.send(encode(request))
-            raw = client.recv(MAX_MESSAGE)
+        print(
+            '\nRequest sent. Waiting for your poem...\n'
+            'The shared AI service may take a minute or two, especially when others are using it.\n'
+            'Please leave this window open and wait for the poem or an error before trying again.',
+            flush=True,
+        )
+        raw = receive_line(client) if transport == 'TCP' else client.recv(MAX_MESSAGE)
         if raw is None:
             raise ValueError('Server closed without a response.')
         response = json.loads(raw)

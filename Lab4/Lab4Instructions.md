@@ -168,7 +168,7 @@ The first conversation is the one you will inspect in this lab. HTTPS on the sec
 
 Each server asks the operating system for an available port and prints that port. Restarting it may change the port. Clients prompt for the server's IPv4 address and port before asking for your name and hobby.
 
-Each client runs one request and exits. Servers keep running until you press **Ctrl+C**. A poem can take tens of seconds, and requests from other students can make the wait longer. Wait for either a poem or an error; the client normally times out after about two minutes without a response. Follow your instructor’s turn-taking directions and do not start extra clients while a request is pending. If a request fails, coordinate before trying again. The programs do not automatically retry.
+After sending your request, the client prints **“Request sent. Waiting for your poem...”** and explains that the shared service may take a minute or two. This means the client is waiting; it is not a confirmation that the server has received the request. Each client runs one request and exits. Servers keep running until you press **Ctrl+C**. A poem can take tens of seconds, and requests from other students can make the wait longer. Wait for either a poem or an error; the client normally times out after about two minutes without a response. Follow your instructor’s turn-taking directions and do not start extra clients while a request is pending. If a request fails, coordinate before trying again. The programs do not automatically retry.
 
 ### Choose the correct address and capture interface
 
