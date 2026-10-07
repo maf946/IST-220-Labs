@@ -38,6 +38,10 @@ Give students the entire Lab4 folder and distribute the class key through your c
 
 The new instructions preserve four report questions: UDP operation, UDP packet evidence, partner TCP port discovery, and TCP/UDP comparison. Poems are intentionally short, and errors or imperfect wording are not a reason to tune the model during the lab.
 
+## Code organization
+
+The four client/server scripts deliberately duplicate transport and message-handling code for student inspection. `lab4_common.py` contains only AI configuration and HTTPS support. When updating an existing download to this layout, replace all four scripts and the helper together; keep the local configuration and virtual environment.
+
 ## Automated checks
 
 From the repository root:

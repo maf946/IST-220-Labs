@@ -1,6 +1,21 @@
 # How the poem socket programs work
 
-The socket programs use Python's standard library; the HTTPS helper also uses certifi's trusted certificate bundle. Install certifi into the project interpreter as explained in the lab instructions. Clients alone do not call the HTTPS helper. The four short entry-point files select TCP or UDP and client or server behavior. The implementation is in `lab4_common.py`; read that file when tracing socket calls.
+The socket programs use Python's standard library; the HTTPS helper also uses certifi's trusted certificate bundle. Install certifi into the project interpreter as explained in the lab instructions. Clients alone do not call the HTTPS helper. Each of the four scripts contains its own socket operations, JSON handling, validation, and main program. Some code is deliberately duplicated so you can follow a complete exchange without switching to a shared transport implementation. Only the AI configuration and HTTPS call remain in `lab4_common.py`; neither client imports it.
+
+## Where to look in the code
+
+| Script | Follow these operations in `main()` |
+|---|---|
+| `UDPClient.py` | Prompt → create `SOCK_DGRAM` socket → select peer → `send` one datagram → `recv` one reply → print poem |
+| `UDPServer.py` | Load AI settings → create `SOCK_DGRAM` socket → `bind` → repeatedly `recvfrom`, build a reply, and `sendto` the sender |
+| `TCPClient.py` | Prompt → create `SOCK_STREAM` socket → `connect` → `sendall` → collect a newline-delimited reply → print poem |
+| `TCPServer.py` | Load AI settings → create `SOCK_STREAM` socket → `bind` → `listen` → repeatedly `accept`, read, reply, and close the accepted socket |
+
+Start with `main()` in each script, then read the helper functions above it. In both servers, `reply_for()` shows how the received JSON becomes an AI request and how the poem becomes a reply. In both TCP scripts, `receive_line()` shows the loop needed to collect a full message from a byte stream. Each socket is inside a `with` block, which closes it on exit.
+
+The servers’ `show_address()` function uses a separate UDP socket to ask the operating system which local address it would use to reach an external address. It does not send application data; this is only a suggested address for the startup display.
+
+The class key, certificate bundle, model prompt, and HTTPS request live in `lab4_common.py`. The student socket conversation is entirely in the four scripts.
 
 ## One request, two network conversations
 

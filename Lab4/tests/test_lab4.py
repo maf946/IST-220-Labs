@@ -12,34 +12,42 @@ from unittest.mock import patch
 LAB = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(LAB))
 import lab4_common as lab
+import TCPClient
+import TCPServer
+import UDPClient
+import UDPServer
 
 
 class ProtocolTests(unittest.TestCase):
     def test_fragmented_tcp_message(self):
-        reader, writer = socket.socketpair()
-        with reader, writer:
-            def send():
-                writer.sendall(b'{"name":')
-                writer.sendall(b'"Alex"}\n')
-            thread = threading.Thread(target=send)
-            thread.start()
-            self.assertEqual(lab.receive_line(reader), b'{"name":"Alex"}')
-            thread.join()
+        for module in (TCPClient, TCPServer):
+            with self.subTest(module=module.__name__):
+                reader, writer = socket.socketpair()
+                with reader, writer:
+                    def send():
+                        writer.sendall(b'{"name":')
+                        writer.sendall(b'"Alex"}\n')
+                    thread = threading.Thread(target=send)
+                    thread.start()
+                    self.assertEqual(module.receive_line(reader), b'{"name":"Alex"}')
+                    thread.join()
 
     def test_empty_scan_connection(self):
         reader, writer = socket.socketpair()
         writer.close()
         with reader:
-            self.assertIsNone(lab.receive_line(reader))
+            self.assertIsNone(TCPServer.receive_line(reader))
 
     def test_response_size_and_unicode(self):
         request = {'request_id': 'abc', 'name': 'Alex', 'hobby': 'painting'}
-        with patch.object(lab, 'ask_ai', return_value=('🌟\n' * 1000, {})):
-            raw = lab.reply_for(lab.encode(request), ('unused', 'SECRET', 'unused'))
-        result = json.loads(raw)
-        self.assertLessEqual(len(raw), 1200)
-        self.assertTrue(result['truncated'])
-        self.assertNotIn(b'SECRET', raw)
+        for module in (TCPServer, UDPServer):
+            with self.subTest(module=module.__name__):
+                with patch.object(module, 'ask_ai', return_value=('🌟\n' * 1000, {})):
+                    raw = module.reply_for(module.encode(request), ('unused', 'SECRET', 'unused'))
+                result = json.loads(raw)
+                self.assertLessEqual(len(raw), 1200)
+                self.assertTrue(result['truncated'])
+                self.assertNotIn(b'SECRET', raw)
 
     def test_https_trust_and_certificate_error(self):
         import ssl
@@ -55,10 +63,12 @@ class ProtocolTests(unittest.TestCase):
             self.assertGreater(handler._context.cert_store_stats()['x509_ca'], 0)
 
     def test_invalid_request_does_not_call_ai(self):
-        with patch.object(lab, 'ask_ai') as ask:
-            for data in (b'not json', b'[]', b'{}', b'\xff', b'x' * 4097):
-                self.assertFalse(json.loads(lab.reply_for(data, None))['ok'])
-            ask.assert_not_called()
+        for module in (TCPServer, UDPServer):
+            with self.subTest(module=module.__name__):
+                with patch.object(module, 'ask_ai') as ask:
+                    for data in (b'not json', b'[]', b'{}', b'\xff', b'x' * 4097):
+                        self.assertFalse(json.loads(module.reply_for(data, None))['ok'])
+                    ask.assert_not_called()
 
 
 class IntegrationTests(unittest.TestCase):
@@ -114,6 +124,7 @@ class IntegrationTests(unittest.TestCase):
                     result = subprocess.run([sys.executable, str(LAB / f'{protocol}Client.py')], input=f'127.0.0.1\n{port}\nAlex\nstargazing\n', capture_output=True, text=True, env=env, timeout=10)
                     self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
                     self.assertIn('A poem arrives.', result.stdout)
+                    self.assertLess(result.stdout.index('Waiting for your poem'), result.stdout.index('A poem arrives.'))
                     self.assertNotIn('TEST-KEY', result.stdout)
                 finally:
                     server.terminate()
