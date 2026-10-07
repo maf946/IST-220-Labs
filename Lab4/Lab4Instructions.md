@@ -18,7 +18,7 @@ By the end, you should be able to identify socket endpoints, distinguish transpo
 
 ## Before you begin
 
-You need Python 3.9 or newer, Wireshark (including Npcap on Windows), Nmap, the class API key from your instructor, and the Lab4 folder from this repository.
+You need Python 3.9 or newer, Wireshark (including Npcap on Windows), Nmap, the class API key available in the **“Lab 4: Python Socket Scripts”** assignment in Canvas, and the Lab4 folder from this repository.
 
 ### Download and extract the lab files
 
@@ -110,7 +110,11 @@ To use terminals inside PyCharm, select **View → Tool Windows → Terminal**. 
 
 Check Nmap with `nmap --version`. If Python, Nmap, or Wireshark is missing, complete your instructor’s software setup before continuing. No extra Python packages or `pip install` commands are required. The numbered steps show macOS commands; use the Windows equivalents above when appropriate.
 
-Copy `lab4_config.example.json` to **`lab4_config.json`** in the same folder. Replace `PASTE_CLASS_KEY_HERE` in the copy with the key provided by your instructor. Keep the quotation marks and the other settings. Do not include this file or the key in your report, screenshots, or Git commits. The repository ignores the local configuration file.
+### Configure the class key
+
+Open the **“Lab 4: Python Socket Scripts”** assignment in Canvas to find the class key.
+
+Copy `lab4_config.example.json` to **`lab4_config.json`** in the same folder. Replace `PASTE_CLASS_KEY_HERE` in the copy with the class key from that Canvas assignment. Keep the quotation marks and the other settings. Do not include this file or the key in your report, screenshots, or Git commits. The repository ignores the local configuration file.
 
 Use a plain-text editor for the JSON file, and make sure its name is not accidentally `lab4_config.json.txt`. Leave the URL and model alias unchanged. Everyone needs their own configured copy because everyone will take a turn running a server.
 
@@ -269,7 +273,7 @@ Screenshots must be readable and should show only the relevant application windo
 
 | Symptom | What to check |
 |---|---|
-| Missing configuration or rejected class key | Check the local filename, JSON syntax, and key supplied by your instructor. Never paste the key into a help screenshot. |
+| Missing configuration or rejected class key | Check the local filename, JSON syntax, and key in the **“Lab 4: Python Socket Scripts”** assignment in Canvas. Never paste the key into a help screenshot. |
 | Client still asks for a major, or reports a missing hobby | Obtain the current Lab4 folder on both computers and restart the server. The current version asks for a hobby. |
 | PyCharm says no interpreter is configured | Select a local Python interpreter in Settings as described above. |
 | Typing does not answer the client’s prompts | Click the client’s Run output area; do not type in the server tab or Python Console. |
