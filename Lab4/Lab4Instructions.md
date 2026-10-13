@@ -45,7 +45,7 @@ Keep these files together in `Lab4`:
 
 - `TCPClient.py`, `TCPServer.py`, `UDPClient.py`, `UDPServer.py`
 - `lab4_common.py`
-- `lab4_config.example.json`
+- `lab4_config.json`
 - `requirements.txt`
 
 ### Install PyCharm
@@ -132,7 +132,7 @@ Check Nmap with `nmap --version`. If Python, Nmap, or Wireshark is missing, comp
 
 Open the **“Lab 4: Python Socket Scripts”** assignment in Canvas to find the class key.
 
-Copy `lab4_config.example.json` to **`lab4_config.json`** in the same folder. Replace `PASTE_CLASS_KEY_HERE` in the copy with the class key from that Canvas assignment. Keep the quotation marks and the other settings. Do not include this file or the key in your report, screenshots, or Git commits. The repository ignores the local configuration file.
+Open the supplied **`lab4_config.json`** file in PyCharm. Replace `PASTE_CLASS_KEY_HERE` with the class key from that Canvas assignment, then save the file. No copying or renaming is needed. Keep the quotation marks and the other settings. Do not include this file or the key in your report, screenshots, or Git commits. The downloaded file contains only a placeholder; keep your edited copy with the real key private.
 
 Use a plain-text editor for the JSON file, and make sure its name is not accidentally `lab4_config.json.txt`. Leave the URL and model alias unchanged. Everyone needs their own configured copy because everyone will take a turn running a server.
 

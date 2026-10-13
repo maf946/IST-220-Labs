@@ -24,7 +24,7 @@ The script reads the existing Avar key file and sends exactly three concurrent r
 
 A successful run exits with status 0 and reports `Completed: 3/3`. Check elapsed times as well as success: a three-request pass is a small readiness check, not proof that a whole class can submit simultaneously. On October 6, 2026, three concurrent public requests completed successfully at about 30, 51, and 82 seconds. Local requests also passed, and manual TCP and UDP student exchanges using Avar’s LAN address returned poems. These live checks used the earlier major prompt; the current activity asks for a hobby. Campus peer discovery and Wireshark captures still need a classroom check. A single inference slot means concurrent requests can queue and encounter upstream timeouts. If this test fails or becomes too slow, stagger student groups rather than repeatedly retrying.
 
-Then configure one student server using a copy of `lab4_config.example.json`, run each server/client pair locally, and verify a Wireshark capture. Test one partner connection on the actual classroom network. Campus client isolation can block peer traffic even when the public AI endpoint works.
+Then configure one student server by entering the class key in the supplied `lab4_config.json`, run each server/client pair locally, and verify a Wireshark capture. Test one partner connection on the actual classroom network. Campus client isolation can block peer traffic even when the public AI endpoint works.
 
 Requests include `User-Agent: IST220-Lab/1.0`. The earlier default Python requests received HTTP 403 from the public endpoint; a manual request with this application header and the updated public load test succeeded. Keep the updated helper when distributing the lab.
 
@@ -34,7 +34,7 @@ A Windows PyCharm environment could not verify the service certificate using its
 
 The student instructions currently link to the ZIP for the `lab4-ai-poems` branch. Before deleting that branch after a merge, update both the direct ZIP link and the repository/branch directions to the branch or release students should use.
 
-Give students the entire Lab4 folder and distribute the class key through your course's private channel. Do not commit the actual configuration or key. The key grants access to this local service; rotate it if it is exposed. Student clients do not need it, but each student running a server does.
+Give students the entire Lab4 folder and distribute the class key through your course's private channel. The repository tracks `lab4_config.json` with a placeholder key only. Do not commit a real key in this file; Git will notice edits to this tracked file. Keep the populated configuration private. If updating an existing installation, preserve its configured key rather than overwriting it with the placeholder. The key grants access to this local service; rotate it if it is exposed. Student clients do not need it, but each student running a server does.
 
 The new instructions preserve four report questions: UDP operation, UDP packet evidence, partner TCP port discovery, and TCP/UDP comparison. Poems are intentionally short, and errors or imperfect wording are not a reason to tune the model during the lab.
 

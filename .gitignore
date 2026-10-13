@@ -9,7 +9,6 @@
 .idea/vcs.xml
 
 
-# Local lab credentials and Python caches
-lab4_config.json
+# Python caches (lab4_config.json is tracked with a placeholder key only)
 __pycache__/
 *.pyc
