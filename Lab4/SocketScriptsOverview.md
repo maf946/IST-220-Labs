@@ -56,3 +56,7 @@ An empty connection from a port scan is closed without contacting the model. An 
 The shared AI request has a 110-second socket timeout; student clients wait up to 120 seconds for socket operations. These are network operation timeouts, not strict guarantees of total wall-clock duration. Proxies may impose their own limits. Name and hobby lengths are bounded, and messages are limited to 4,096 bytes. The server does not retry or grade poem quality.
 
 The student-to-Python-server exchange is readable plaintext over either protocol. The Python-server-to-AI exchange uses HTTPS. Capture the correct interface and port to distinguish them.
+
+## Waiting indicator
+
+Each client defines its own `loading_indicator()` helper. A background thread updates a spinner and elapsed time while the main thread performs the normal blocking receive. It sends no extra packets and does not retry the request. A `finally` block stops the indicator before displaying a result or error, including on timeout or Ctrl+C. Plain redirected output receives occasional status lines; terminals and PyCharm Run consoles receive the animation. Elapsed time is not an estimate of how much generation is complete.

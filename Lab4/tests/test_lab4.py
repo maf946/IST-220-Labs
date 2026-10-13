@@ -19,6 +19,37 @@ import UDPServer
 
 
 class ProtocolTests(unittest.TestCase):
+    def test_loading_indicator_cleanup(self):
+        import io
+        import os
+
+        class Output(io.StringIO):
+            def write(self, value):
+                result = super().write(value)
+                if 'elapsed' in value:
+                    rendered.set()
+                return result
+
+        for module in (TCPClient, UDPClient):
+            for animated in (False, True):
+                for failure in (None, TimeoutError, KeyboardInterrupt):
+                    with self.subTest(module=module.__name__, animated=animated, failure=failure):
+                        rendered = threading.Event()
+                        output = Output()
+                        with patch.object(module.sys, 'stdout', output), patch.dict(
+                                os.environ, {'PYCHARM_HOSTED': '1' if animated else '0'}):
+                            try:
+                                with module.loading_indicator():
+                                    self.assertTrue(rendered.wait(2))
+                                    if failure:
+                                        raise failure()
+                            except (TimeoutError, KeyboardInterrupt):
+                                if failure is None:
+                                    raise
+                        self.assertIn('Waiting for your poem... 0s elapsed', output.getvalue())
+                        self.assertEqual('\r' in output.getvalue(), animated)
+                        self.assertFalse(any(t.name == 'poem-loading' for t in threading.enumerate()))
+
     def test_fragmented_tcp_message(self):
         for module in (TCPClient, TCPServer):
             with self.subTest(module=module.__name__):
