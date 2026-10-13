@@ -69,6 +69,8 @@ If the current release does not support your operating system, consult your inst
 
 ### Open the lab and select Python
 
+**To open the code in PyCharm:** [Download the lab ZIP here](https://github.com/maf946/IST-220-Labs/archive/refs/heads/lab4-ai-poems.zip), or visit the [GitHub repository](https://github.com/maf946/IST-220-Labs/tree/lab4-ai-poems), click the green **Code** button, and choose **Download ZIP**. Extract the downloaded ZIP (double-click it on Mac; right-click → **Extract All…** on Windows). Then open PyCharm, select **Open**, and find the extracted code on your computer. Inside **`IST-220-Labs-lab4-ai-poems`**, select the **`Lab4`** folder and open it as your project. If you already downloaded and extracted the files above, use that same folder.
+
 1. On PyCharm’s welcome screen, click **Open**. If another project is already open, use **File → Open**.
 2. Select the extracted **Lab4 folder**, not one individual `.py` file. Open it as one project. If asked whether to trust it, confirm only after checking that it is the course-provided folder.
 3. In the Project pane, confirm that all four client/server scripts and `lab4_common.py` are visible. Do not create a separate project for each script. Use matching versions on both partners’ computers.
