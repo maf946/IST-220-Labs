@@ -48,6 +48,44 @@ Keep these files together in `Lab4`:
 - `lab4_config.json`
 - `requirements.txt`
 
+### Install Nmap
+
+Nmap is the tool you will use to discover your partner’s TCP server port in Part 2. It is a separate application, not a Python package. **Official download page: [https://nmap.org/download.html](https://nmap.org/download.html).** If `nmap --version` already works, skip installation.
+
+**Windows**
+
+1. Open the official download page and find **Microsoft Windows binaries**.
+2. Download the **latest stable release self-installer**, named `nmap-<version>-setup.exe`.
+3. Run the installer and follow the prompts. Keep Nmap selected and allow it to add Nmap to your `PATH`. Install Npcap if it is not already installed; you may already have it from Wireshark. You do not need to open Zenmap for this lab.
+4. After installation, open a **new PowerShell window**. If using PyCharm’s Terminal, restart PyCharm so it picks up the updated `PATH`.
+5. Run the verification command below. Administrator permission may be needed to install the software; the lab’s TCP connect scan does not require an administrator terminal.
+
+**macOS**
+
+1. Open the official download page and find **Mac OS X Binaries**.
+2. Download the latest stable `.dmg`, open it, and run the installer inside. Follow its prompts to install Nmap.
+3. Open a new Terminal window and run the verification command below. If macOS reports that the installer is incompatible or blocks installation, ask your instructor for help.
+
+If you already use **Homebrew**, you can instead install Nmap in Terminal with:
+
+```bash
+brew install nmap
+```
+
+The official Mac download is an Intel (x86-64) build. On an Apple Silicon Mac, Homebrew offers a native alternative; use the [Homebrew installation directions](https://brew.sh/) if you choose that route and do not already have it installed. Follow Homebrew’s printed shell-setup instructions before running `brew install nmap`.
+
+**Verify installation on either platform**
+
+```text
+nmap --version
+```
+
+You should see an Nmap version number and build information. If you see “command not found” or “not recognized,” reopen your terminal (and restart PyCharm if applicable), then try again. If it still fails, ask your instructor to check the installation and `PATH`.
+
+Run Nmap commands in **Terminal or PowerShell**, including PyCharm’s Terminal tab—not in a `.py` file, the Python Console, or a running client/server’s input area. Only scan your consenting lab partner and the assigned port range, as directed in Part 2.
+
+Additional help: [Nmap’s Windows installation guide](https://nmap.org/book/inst-windows.html), [macOS installation guide](https://nmap.org/book/inst-macosx.html), and [Homebrew’s Nmap package](https://formulae.brew.sh/formula/nmap).
+
 ### Install PyCharm
 
 If PyCharm already runs Python programs on your computer, skip installation and open the lab folder below. This lab uses PyCharm’s **free core features**. The current download combines the former Community Edition and optional Pro features; you do not need to purchase a subscription or activate an AI assistant for this lab.
@@ -126,7 +164,7 @@ To use terminals inside PyCharm, select **View → Tool Windows → Terminal**. 
 | Start TCP server | `python3 TCPServer.py` | `py -3 TCPServer.py` |
 | Start TCP client | `python3 TCPClient.py` | `py -3 TCPClient.py` |
 
-Check Nmap with `nmap --version`. If Python, Nmap, or Wireshark is missing, complete your instructor’s software setup before continuing. The only additional Python package required is certifi, installed above. The numbered steps show macOS commands; use the Windows equivalents above when appropriate.
+Verify Nmap using the installation steps above. If Python or Wireshark is missing, complete your instructor’s software setup before continuing. The only additional Python package required is certifi, installed above. The numbered steps show macOS commands; use the Windows equivalents above when appropriate.
 
 ### Configure the class key
 
