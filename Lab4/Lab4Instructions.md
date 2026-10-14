@@ -254,7 +254,14 @@ After sending your request, the client prints **“Request sent. Waiting for you
 
    The two IP addresses can be identical in a loopback capture. Use the ports and message contents to distinguish the programs.
 
-**Question 1.** Include screenshots showing the UDP server's port and your client's inputs and poem. Explain which program is the client, which is the server, and why the client must know the server's address and port.
+**Question 1.** Include screenshots of the **program output in your terminal windows or PyCharm Run tabs** showing:
+
+- **UDPServer:** its printed listening port.
+- **UDPClient:** the server address and port you entered, your first name and hobby, and the returned poem.
+
+You may use separate screenshots or one screenshot showing both outputs clearly. **Wireshark screenshots are requested in Question 2, not Question 1.**
+
+Explain which program is the client, which is the server, and why the client must know the server's address and port.
 
 **Question 2.** Include a Follow UDP Stream screenshot showing your request and response. Include your endpoint table with the source and destination IP addresses and ports in each direction. Explain what the request ID does at the application layer, and why receiving this response does not mean UDP guarantees delivery. Can someone capturing this client–server traffic read your name and hobby? Support your answer with your capture.
 
@@ -318,7 +325,7 @@ Being on the same Wi-Fi network does not guarantee that devices can reach each o
 
 Submit one report with labeled answers to Questions 1–4. Before submitting, check that it includes:
 
-- **Q1:** UDP server and client output, including your name, hobby, and returned poem, plus your explanation of the two roles.
+- **Q1:** Terminal or PyCharm Run-tab screenshots of the UDP server’s port and the client’s inputs and poem, plus your explanation of the two roles.
 - **Q2:** UDP stream screenshot, endpoint table, and explanations about request IDs, delivery, and readability.
 - **Q3:** Partner information, exact Nmap command, scan screenshot, and your interpretation (or the documented instructor-approved fallback).
 - **Q4:** TCP stream and handshake screenshots, plus your TCP/UDP comparison and explanation of the wait for a poem.
